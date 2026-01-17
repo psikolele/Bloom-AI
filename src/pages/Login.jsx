@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Logo from '../components/Logo';
-import '../styles/Login.css'; // Import the specific styles
+import NeonPopup from '../components/NeonPopup'; // Import Popup
+import '../styles/Login.css';
 
 const Login = () => {
     const navigate = useNavigate();
     const [credentials, setCredentials] = useState({ username: '', password: '' });
-    const [loaded, setLoaded] = useState(false);
+    const [isLoading, setIsLoading] = useState(false); // Valid Loading state
+    const [error, setError] = useState(null); // Error state for Popup
 
-    // Animation Logic (simulating the jQuery loadIn)
+    // Animation Logic
     useEffect(() => {
         // Stage 1: Scale Check Logo
         setTimeout(() => {
@@ -28,7 +30,6 @@ const Login = () => {
                     // Stage 4: Expand Accept Container
                     setTimeout(() => {
                         const acceptContainer = document.querySelector('.acceptContainer');
-                        // We let CSS transition handle the height/Slide
                         if (acceptContainer) acceptContainer.classList.add('loadIn');
 
                         // Stage 5: Form Elements In
@@ -46,17 +47,53 @@ const Login = () => {
         setCredentials({ ...credentials, [e.target.name]: e.target.value });
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        if (credentials.username === 'admin' && credentials.password === 'admin') {
-            navigate('/dashboard', { state: { username: credentials.username } });
-        } else {
-            alert('Invalid credentials (use admin/admin)');
+        setIsLoading(true);
+        setError(null);
+
+        try {
+            const response = await fetch('https://emanueleserra.app.n8n.cloud/webhook/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(credentials)
+            });
+
+            // Assuming N8N returns { success: true/false, message: "..." }
+            // We will adapt based on the response content.
+            let data;
+            try {
+                data = await response.json();
+            } catch (parseError) {
+                // Fallback if not JSON
+                console.error("Non-JSON response", parseError);
+                throw new Error("Server error: Invalid response format");
+            }
+
+            if (response.ok && data.success) { // logic dependent on N8N return structure
+                // If data.success is explicitly true OR if we just rely on HTTP 200 and absence of "error"
+                // Let's assume the user workflow returns { success: true, username: ... }
+                navigate('/dashboard', { state: { username: data.username || credentials.username } });
+            } else {
+                // Logic for 'success: false' or HTTP error
+                throw new Error(data.message || 'Invalid Username or Password');
+            }
+
+        } catch (err) {
+            console.error("Login Error:", err);
+            setError(err.message || "Failed to connect to server");
+        } finally {
+            setIsLoading(false);
         }
     };
 
     return (
         <div id="login-body">
+            {/* Render Popup if Error exists */}
+            {error && <NeonPopup message={error} onClose={() => setError(null)} />}
+
             <div id="container">
                 <div id="inviteContainer">
 
@@ -83,6 +120,7 @@ const Login = () => {
                                         value={credentials.username}
                                         onChange={handleChange}
                                         autoComplete="off"
+                                        disabled={isLoading}
                                     />
                                 </div>
 
@@ -94,12 +132,20 @@ const Login = () => {
                                         required
                                         value={credentials.password}
                                         onChange={handleChange}
+                                        disabled={isLoading}
                                     />
                                     <a className="forgotPas" href="#">FORGOT YOUR PASSWORD?</a>
                                 </div>
 
                                 <div className="formDiv" style={{ transitionDelay: '0.6s' }}>
-                                    <button className="acceptBtn" type="submit">Login</button>
+                                    <button
+                                        className="acceptBtn"
+                                        type="submit"
+                                        disabled={isLoading}
+                                        style={{ opacity: isLoading ? 0.7 : 1, cursor: isLoading ? 'wait' : 'pointer' }}
+                                    >
+                                        {isLoading ? 'Authenticating...' : 'Login'}
+                                    </button>
                                     <div className="register">
                                         Need an account?
                                         <a href="#">Register</a>
