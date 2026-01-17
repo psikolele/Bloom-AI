@@ -12,21 +12,24 @@ const Login = () => {
     useEffect(() => {
         // Stage 1: Scale Check Logo
         setTimeout(() => {
-            document.querySelector('.logoContainer').style.transform = 'scale(1)';
+            const logoContainer = document.querySelector('.logoContainer');
+            if (logoContainer) logoContainer.style.transform = 'scale(1)';
 
             // Stage 2: Logo In
             setTimeout(() => {
-                document.querySelector('.logo-main').classList.add('loadIn');
+                const logoMain = document.querySelector('.logo-main');
+                if (logoMain) logoMain.classList.add('loadIn');
 
                 // Stage 3: Text In
                 setTimeout(() => {
-                    document.querySelector('.logo-text').classList.add('loadIn');
+                    const logoText = document.querySelector('.logo-text');
+                    if (logoText) logoText.classList.add('loadIn');
 
                     // Stage 4: Expand Accept Container
                     setTimeout(() => {
                         const acceptContainer = document.querySelector('.acceptContainer');
                         // We let CSS transition handle the height/Slide
-                        acceptContainer.classList.add('loadIn');
+                        if (acceptContainer) acceptContainer.classList.add('loadIn');
 
                         // Stage 5: Form Elements In
                         setTimeout(() => {

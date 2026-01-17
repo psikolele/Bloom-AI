@@ -99,3 +99,191 @@ h6 {
         opacity: 1;
     }
 }
+
+/* Float Animation */
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-20px);
+    }
+}
+
+.animate-float {
+    animation: float 6s ease-in-out infinite;
+}
+
+/* Gradient Shift Animation */
+@keyframes gradient-shift {
+    0%, 100% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+}
+
+.animate-gradient {
+    background-size: 200% 200%;
+    animation: gradient-shift 8s ease infinite;
+}
+
+/* Pulse Animation */
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.7;
+        transform: scale(1.05);
+    }
+}
+
+.animate-pulse {
+    animation: pulse 3s ease-in-out infinite;
+}
+
+/* Shimmer Animation */
+@keyframes shimmer {
+    0% {
+        transform: translateX(-100%);
+    }
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+.animate-shimmer {
+    animation: shimmer 3s infinite;
+}
+
+/* Glow Pulse Animation */
+@keyframes glow-pulse {
+    0%, 100% {
+        box-shadow: 0 0 20px rgba(255, 107, 53, 0.2);
+    }
+    50% {
+        box-shadow: 0 0 40px rgba(255, 107, 53, 0.6);
+    }
+}
+
+.animate-glow-pulse {
+    animation: glow-pulse 3s ease-in-out infinite;
+}
+
+/* Slide Up Animation */
+@keyframes slide-up {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-slide-up {
+    animation: slide-up 0.8s ease-out forwards;
+}
+
+/* Fade In Animation */
+@keyframes fade-in {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.animate-fade-in {
+    animation: fade-in 1s ease-out forwards;
+}
+
+/* Scale In Animation */
+@keyframes scale-in {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.animate-scale-in {
+    animation: scale-in 0.5s ease-out forwards;
+}
+
+/* Rotate Slow Animation */
+@keyframes rotate-slow {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.animate-rotate-slow {
+    animation: rotate-slow 30s linear infinite;
+}
+
+/* Text Glow Animation */
+@keyframes text-glow {
+    0%, 100% {
+        text-shadow: 0 0 20px rgba(255, 107, 53, 0.5);
+    }
+    50% {
+        text-shadow: 0 0 30px rgba(255, 107, 53, 0.9), 0 0 40px rgba(255, 107, 53, 0.6);
+    }
+}
+
+.animate-text-glow {
+    animation: text-glow 2s ease-in-out infinite;
+}
+
+/* Spotlight Effect */
+.spotlight {
+    position: relative;
+    overflow: hidden;
+}
+
+.spotlight::before {
+    content: '';
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    background: radial-gradient(
+        circle,
+        rgba(255, 107, 53, 0.15) 0%,
+        transparent 70%
+    );
+    left: var(--mouse-x, 50%);
+    top: var(--mouse-y, 50%);
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.spotlight:hover::before {
+    opacity: 1;
+}
+
+/* Smooth Transitions */
+.transition-smooth {
+    transition: all 0.3s ease;
+}
+
+.transition-fast {
+    transition: all 0.15s ease;
+}
+
+.transition-slow {
+    transition: all 0.5s ease;
+}
