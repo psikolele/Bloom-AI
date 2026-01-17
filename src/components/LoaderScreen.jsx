@@ -14,10 +14,7 @@ const LoaderScreen = ({ onAnimationEnd }) => {
         >
             <div className="flex flex-col items-center justify-center relative">
 
-                {/* Rotating Neon Ring */}
-                <div className="absolute inset-0 w-[180px] h-[180px] -translate-x-[30px] -translate-y-[30px] rounded-full">
-                    <div className="w-full h-full rounded-full border-[3px] border-transparent border-t-[#FF6B35] border-r-[#B349C1] border-b-[#FF6B35] border-l-[#B349C1] blur-md animate-spin-slow"></div>
-                </div>
+                {/* Rotating Neon Ring Removed (Now inside Logo component) */}
 
                 {/* Scale Up Logo */}
                 <div style={{ animation: 'scaleUp 1s ease-out', position: 'relative', zIndex: 10 }}>

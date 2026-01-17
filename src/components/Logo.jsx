@@ -21,19 +21,21 @@ const Logo = ({ size = 60 }) => {
                 src="/bloom-icon.png"
                 alt="Bloom AI Logo"
                 style={{
-                    width: '85%', /* Slightly smaller to fit inside ring */
-                    height: '85%',
+                    width: '96%', /* Filled to eliminate gap - increased from 85% */
+                    height: '96%',
                     objectFit: 'contain',
                     position: 'relative',
                     zIndex: 2,
-                    borderRadius: '50%' /* Ensure image clip if needed */
+                    borderRadius: '50%'
                 }}
             />
 
             <style>{`
             .logo-wrapper {
                 border-radius: 50%;
-                /* box-shadow: 0 0 30px rgba(255, 107, 53, 0.2); Optional ambient glow */
+                display: flex; /* Ensure centering */
+                align-items: center;
+                justify-content: center;
             }
 
             .logo-glow-ring {
@@ -50,14 +52,14 @@ const Logo = ({ size = 60 }) => {
                 );
                 animation: spin-logo 3s linear infinite;
                 z-index: 1;
-                filter: blur(2px); /* Soft light effect */
+                filter: blur(4px); /* Stronger glow to blend spacing */
             }
 
             /* Inner mask to define ring width */
             .logo-glow-ring::after {
                 content: '';
                 position: absolute;
-                inset: 2px; /* Thickness of the light beam */
+                inset: 3px; /* Thickness of the light beam */
                 background: #0A0A0A; /* Match bg to hide center */
                 border-radius: 50%;
             }

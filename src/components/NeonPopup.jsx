@@ -1,11 +1,15 @@
 import React from 'react';
-import { AlertCircle, X } from 'lucide-react';
+import { AlertCircle, CheckCircle, X } from 'lucide-react';
 import '../styles/NeonPopup.css';
 
-const NeonPopup = ({ message, onClose }) => {
+const NeonPopup = ({ message, onClose, type = 'error', title }) => {
+    const isSuccess = type === 'success';
+    const displayTitle = title || (isSuccess ? 'Success' : 'Access Denied');
+    const ButtonText = isSuccess ? 'Continue' : 'Try Again';
+
     return (
         <div className="neon-popup-overlay">
-            <div className="neon-popup-container">
+            <div className={`neon-popup-container ${isSuccess ? 'success' : ''}`}>
                 <button
                     onClick={onClose}
                     className="neon-popup-close-btn"
@@ -14,13 +18,17 @@ const NeonPopup = ({ message, onClose }) => {
                 </button>
 
                 <div className="neon-popup-icon-wrapper">
-                    <div className="neon-popup-icon-circle">
-                        <AlertCircle size={48} className="neon-popup-icon" />
+                    <div className={`neon-popup-icon-circle ${isSuccess ? 'success' : ''}`}>
+                        {isSuccess ? (
+                            <CheckCircle size={48} className={`neon-popup-icon ${isSuccess ? 'success' : ''}`} />
+                        ) : (
+                            <AlertCircle size={48} className="neon-popup-icon" />
+                        )}
                     </div>
                 </div>
 
                 <h3 className="neon-popup-title">
-                    Access Denied
+                    {displayTitle}
                 </h3>
 
                 <p className="neon-popup-message">
@@ -29,9 +37,9 @@ const NeonPopup = ({ message, onClose }) => {
 
                 <button
                     onClick={onClose}
-                    className="neon-popup-action-btn"
+                    className={`neon-popup-action-btn ${isSuccess ? 'success' : ''}`}
                 >
-                    Try Again
+                    {ButtonText}
                 </button>
             </div>
         </div>
