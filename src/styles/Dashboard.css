@@ -37,68 +37,74 @@
     transform: translateY(-1em);
 }
 
-/* Dashboard Container Size & Shiny Animation */
+/* Dashboard Container */
 #inviteContainer.dashboard-size {
     max-width: 1200px !important;
     width: 90vw !important;
     min-height: 700px !important;
     position: relative;
     border-radius: 24px;
-    background-color: #0A0A0A;
+    background-color: transparent;
+    /* Transparent so we see the pseudo-elements */
     box-shadow: 0px 0px 50px rgba(0, 0, 0, 0.8);
-    /* No border or animation on the container itself directly, handled by pseudo elements */
+    overflow: hidden !important;
+    /* Clips the large spinner to the border-radius */
     z-index: 1;
 }
 
-/* Rotating Gradient Border (The "Snake" Effect) */
+/* 1. The Rotating Gradient (The Border Source) */
+/* We make this huge and spin it. The Parent clips it to 24px radius. */
 #inviteContainer.dashboard-size::before {
     content: "";
     position: absolute;
-    inset: -3px;
-    /* Border thickness */
-    border-radius: 26px;
-    /* Slightly larger than container */
+    top: 50%;
+    left: 50%;
+    width: 200%;
+    /* Massive width to cover corners while spinning */
+    height: 200%;
+    transform: translate(-50%, -50%);
+    /* Centered */
     background: conic-gradient(from 0deg,
             transparent 0%,
-            transparent 50%,
-            #FF6B35 75%,
-            #B349C1 100%);
-    z-index: -1;
+            transparent 20%,
+            #FF6B35 40%,
+            #B349C1 50%,
+            #FF6B35 60%,
+            transparent 80%);
+    z-index: -2;
     animation: rotate-border 6s linear infinite;
-    /* Slower and Linear as requested */
 }
 
-/* Inner Mask to hide the center of the conic gradient */
+/* 2. The Inner Mask (The Content Background) */
+/* This covers the spinning gradient everywhere except the 3px edge */
 #inviteContainer.dashboard-size::after {
     content: "";
     position: absolute;
-    inset: 0;
-    border-radius: 24px;
+    inset: 3px;
+    /* Defines border width */
+    border-radius: 21px;
+    /* 24px - 3px = 21px for perfect nesting */
     background: #0A0A0A;
-    /* Matches page background */
     z-index: -1;
 }
 
 @keyframes rotate-border {
     from {
-        transform: rotate(0deg);
+        transform: translate(-50%, -50%) rotate(0deg);
     }
 
     to {
-        transform: rotate(360deg);
+        transform: translate(-50%, -50%) rotate(360deg);
     }
 }
 
-/* Inner Surface Glint (Optional aesthetic addition) */
+/* Inner Surface Glint */
+/* Placed INSIDE the Inner Mask area so it ignores the border */
 .glint-overlay {
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    width: 100%;
-    height: 100%;
-    border-radius: 24px;
+    inset: 3px;
+    /* Match the Inner Mask */
+    border-radius: 21px;
     pointer-events: none;
     overflow: hidden;
     z-index: 10;
@@ -126,12 +132,22 @@
 }
 
 /* Layout Overrides */
+/* Ensure text containers sit ON TOP of the ::after mask */
+#inviteContainer.dashboard-size .logoContainer,
+#inviteContainer.dashboard-size .acceptContainer {
+    position: relative;
+    z-index: 2;
+    /* Crucial: Above the mask CSS */
+}
+
 #inviteContainer.dashboard-size .logoContainer {
     width: 40% !important;
     background: linear-gradient(135deg, rgba(255, 107, 53, 0.05) 0%, rgba(179, 73, 193, 0.05) 100%);
     border-right: 1px solid rgba(255, 255, 255, 0.05);
-    border-top-left-radius: 24px;
-    border-bottom-left-radius: 24px;
+    border-radius: 0;
+    /* Reset */
+    /* We match visual radius by structure, but containers are square inside relative to mask? */
+    /* No, we can just let them overflow the mask? No mask is behind. */
 }
 
 #inviteContainer.dashboard-size .acceptContainer {
@@ -141,6 +157,4 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    border-top-right-radius: 24px;
-    border-bottom-right-radius: 24px;
 }

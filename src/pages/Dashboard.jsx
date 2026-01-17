@@ -49,7 +49,7 @@ const Dashboard = () => {
                     <div id="container">
                         <div id="inviteContainer" className="dashboard-size">
 
-                            {/* NEW: Glint Overlay for surface shine */}
+                            {/* Glint Overlay: Now rendered as part of structure, styled by CSS to be inset 3px */}
                             <div className="glint-overlay"></div>
 
                             {/* Left Side: Brand */}
@@ -85,7 +85,6 @@ const Dashboard = () => {
                             {/* Right Side: Split Text Links */}
                             <div className="acceptContainer">
                                 <div className="h-full flex flex-col justify-center px-12 w-full">
-                                    {/* h-full and justify-center are key here for vertical alignment */}
 
                                     <nav className="dashboard-links" style={{ opacity: 0, transition: 'opacity 1s ease' }}>
 
@@ -115,7 +114,6 @@ const Dashboard = () => {
                                     </nav>
 
                                     <div className="mt-24 text-right opacity-50">
-                                        {/* Added margin-top to separate footer from centered content */}
                                         <span className="text-xs font-mono text-gray-600 uppercase tracking-wider">
                                             System Online &bull; {username === 'admin' ? 'Admin Mode' : 'User Mode'}
                                         </span>
