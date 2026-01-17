@@ -1,0 +1,264 @@
+/* Normalized and adapted from user snippet */
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,600,700|Work+Sans:300,400,700,900');
+
+/* Ensure override */
+#login-body {
+    background: #030303;
+    /* Bloom AI Dark Background */
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100vh;
+    font-family: 'Montserrat', sans-serif;
+    overflow: hidden;
+}
+
+#container {
+    height: 100vh;
+    width: 100vw;
+    background-size: cover !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+/* Background overlay filter if needed */
+#container::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 20% 30%, rgba(255, 107, 53, 0.05), transparent 50%),
+        radial-gradient(circle at 80% 70%, rgba(59, 130, 246, 0.05), transparent 50%);
+    pointer-events: none;
+}
+
+#inviteContainer {
+    display: flex;
+    overflow: hidden;
+    position: relative;
+    border-radius: 5px;
+    box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
+    background: #0A0A0A;
+    /* Card background */
+    max-width: 800px;
+}
+
+.logoContainer {
+    padding: 45px 35px;
+    box-sizing: border-box;
+    position: relative;
+    z-index: 2;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    transform: scale(0);
+    /* Init scale 0 */
+    transition: transform 0.7s ease;
+    background: linear-gradient(135deg, #0A0A0A 0%, #1a1a1a 100%);
+    width: 300px;
+    /* Fixed width for logo side */
+}
+
+/* Diagonal shape overlay for logo container similar to Discord/Wardiere style */
+.logoContainer::before {
+    content: "";
+    background: linear-gradient(135deg, #FF9B6B 0%, #B349C1 100%);
+    position: absolute;
+    top: -50px;
+    left: -50px;
+    width: 150%;
+    height: 150%;
+    filter: blur(80px);
+    /* Bloom effect */
+    opacity: 0.2;
+    z-index: -1;
+}
+
+.acceptContainer {
+    padding: 45px 30px;
+    box-sizing: border-box;
+    width: 400px;
+    margin-left: -400px;
+    /* Initially hidden to left */
+    overflow: hidden;
+    height: 0;
+    /* Initially 0 height */
+    opacity: 0;
+    background: #0A0A0A;
+}
+
+.acceptContainer.loadIn {
+    opacity: 1;
+    margin-left: 0;
+    height: auto !important;
+    /* Allow height to grow */
+    min-height: 400px;
+    transition: all 0.5s ease;
+}
+
+form {
+    position: relative;
+    text-align: center;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+form h1 {
+    margin: 0 0 25px 0;
+    font-family: 'Space Grotesk', 'Work Sans', sans-serif !important;
+    font-weight: 700;
+    font-size: 24px;
+    color: #fff;
+    user-select: none;
+    opacity: 0;
+    left: -30px;
+    position: relative;
+    transition: 0.5s ease;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+form h1.loadIn {
+    left: 0;
+    opacity: 1;
+}
+
+.formContainer {
+    text-align: left;
+}
+
+.formDiv {
+    margin-bottom: 30px;
+    left: -25px;
+    opacity: 0;
+    transition: 0.5s ease;
+    position: relative;
+}
+
+.formDiv.loadIn {
+    opacity: 1;
+    left: 0;
+}
+
+.formDiv p {
+    margin: 0 0 5px 0;
+    font-weight: 700;
+    color: #aaa;
+    font-size: 10px;
+    user-select: none;
+    letter-spacing: 1px;
+}
+
+.formDiv input[type=password],
+.formDiv input[type=email],
+.formDiv input[type=text] {
+    background: transparent;
+    border: none;
+    box-shadow: inset 0 -1px 0 rgba(255, 255, 255, 0.15);
+    padding: 10px 0;
+    box-sizing: border-box;
+    color: #fff;
+    width: 100%;
+    font-size: 14px;
+    outline: none;
+    transition: box-shadow 0.3s;
+}
+
+.formDiv input:focus {
+    box-shadow: inset 0 -2px 0 #FF6B35;
+    /* Bloom Accent */
+}
+
+.forgotPas {
+    color: #aaa;
+    opacity: .8;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 10px;
+    margin-top: 10px;
+    display: block;
+    transition: 0.2s ease;
+    text-align: right;
+}
+
+.forgotPas:hover {
+    opacity: 1;
+    color: #fff;
+}
+
+.acceptBtn {
+    width: 100%;
+    box-sizing: border-box;
+    background: linear-gradient(135deg, #FF6B35 0%, #FF8F6B 100%);
+    border: none;
+    color: #fff;
+    padding: 15px 0;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.2s ease;
+    user-select: none;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 0 20px rgba(255, 107, 53, 0.2);
+}
+
+.acceptBtn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 30px rgba(255, 107, 53, 0.4);
+}
+
+.register {
+    color: #aaa;
+    font-size: 12px;
+    padding-top: 15px;
+    display: block;
+    text-align: center;
+}
+
+.register a {
+    color: #FF6B35;
+    text-decoration: none;
+    margin-left: 5px;
+    user-select: none;
+    font-weight: 600;
+}
+
+.logo-main {
+    position: relative;
+    top: -20px;
+    opacity: 0;
+    transition: 0.8s ease;
+}
+
+.logo-main.loadIn {
+    top: 0;
+    opacity: 1;
+}
+
+.logo-text {
+    margin-top: -70px;
+    opacity: 0;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: 28px;
+    color: white;
+    background: linear-gradient(135deg, #FF9B6B 0%, #FF7B4D 25%, #5B9FE3 50%, #B349C1 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    transition: 0.8s ease;
+}
+
+.logo-text.loadIn {
+    margin-top: 20px;
+    opacity: 1;
+}
