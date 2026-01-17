@@ -1,0 +1,31 @@
+:root {
+  /* Colors - Primary */
+  --accent-primary: #FF6B35;
+  --accent-glow: #FF9B75;
+  
+  /* Colors - Background */
+  --void: #030303;
+  --surface: #0A0A0A;
+  
+  /* Colors - Text */
+  --text-primary: #E0E0E0;
+  --text-secondary: #9CA3AF;
+  --text-muted: #6B7280;
+  
+  /* Colors - System */
+  --success: #34D399;
+  --error: #F87171;
+  
+  /* Fonts */
+  --font-sans: 'Inter', sans-serif;
+  --font-mono: 'Space Grotesk', monospace;
+  
+  /* Gradients */
+  --gradient-logo: linear-gradient(135deg, #FF9B6B 0%, #FF7B4D 25%, #5B9FE3 50%, #B349C1 100%);
+  --gradient-btn: linear-gradient(135deg, #FF6B35 0%, #FF8F6B 100%);
+  
+  /* Effects */
+  --shadow-glow: 0 0 20px rgba(255, 107, 53, 0.4);
+  --glass-bg: rgba(18, 18, 18, 0.6);
+  --glass-border: rgba(255, 255, 255, 0.08);
+}
