@@ -4,7 +4,7 @@ import Logo from './Logo';
 const LoaderScreen = ({ onAnimationEnd }) => {
     return (
         <div
-            className="fixed inset-0 z-50 flex items-center justify-center bg-[#030303]"
+            className="loader-overlay"
             style={{ animation: 'fadeOut 0.5s ease-out forwards 2.5s' }}
             onAnimationEnd={(e) => {
                 if (e.animationName === 'fadeOut') {
@@ -12,7 +12,7 @@ const LoaderScreen = ({ onAnimationEnd }) => {
                 }
             }}
         >
-            <div className="flex flex-col items-center">
+            <div className="flex flex-col items-center justify-center w-full h-full">
                 <div style={{ animation: 'scaleUp 1s ease-out' }}>
                     <Logo size={120} />
                 </div>
@@ -33,6 +33,18 @@ const LoaderScreen = ({ onAnimationEnd }) => {
             </div>
 
             <style>{`
+        .loader-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: #030303;
+            z-index: 99999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
         @keyframes fadeOut {
             to { opacity: 0; visibility: hidden; }
         }

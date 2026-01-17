@@ -1,0 +1,63 @@
+@import url('https://fonts.googleapis.com/css2?family=Mona+Sans:ital,wdth,wght@0,75..125,200..900;1,75..125,200..900&display=swap');
+
+/* Dashboard Link Container */
+.dashboard-links {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    /* Increased spacing */
+    align-items: flex-start;
+}
+
+.split-link {
+    color: #f4f4ed;
+    /* Light cream to match reference */
+    display: flex;
+    font-family: "Mona Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-size: 3rem;
+    /* Larger CTA size */
+    font-style: normal;
+    font-variation-settings: "wdth" var(--font-width, 100);
+    font-weight: 900;
+    line-height: 0.9;
+    overflow: hidden;
+    text-decoration: none;
+    text-shadow: 0 1em 0 #B349C1;
+    /* Using Brand Purple for shadow/reveal color */
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.split-link span {
+    display: inline-block;
+    /* transition: 300ms translate cubic-bezier(0.2, 0, 0.5, 1); */
+    transition: transform 300ms cubic-bezier(0.2, 0, 0.5, 1);
+    transform: translateY(0);
+    transition-delay: calc(40ms + var(--char, 0) * 20ms);
+}
+
+.split-link:hover span {
+    transform: translateY(-1em);
+    /* Move up to reveal shadow text */
+}
+
+/* Override Container Size */
+#inviteContainer.dashboard-size {
+    max-width: 1200px !important;
+    width: 90vw !important;
+    min-height: 700px !important;
+}
+
+/* Adjust Accept Container width for larger layout */
+#inviteContainer.dashboard-size .acceptContainer {
+    width: 60% !important;
+    /* Take more space */
+    background: #0A0A0A;
+}
+
+/* Adjust Logo Container width */
+#inviteContainer.dashboard-size .logoContainer {
+    width: 40% !important;
+}
