@@ -1,78 +1,180 @@
-import React from 'react';
-import { LayoutGrid, MessageSquare, Briefcase, Zap } from 'lucide-react';
-import AppCard from '../components/AppCard';
+import React, { useEffect, useState } from 'react';
+import { ExternalLink, Briefcase, MessageSquare, Zap } from 'lucide-react';
 import Logo from '../components/Logo';
+import LoaderScreen from '../components/LoaderScreen';
+import '../styles/Login.css'; // Reusing the split layout styles
 
 const Dashboard = () => {
+    const [loading, setLoading] = useState(true);
+
+    // Animation Logic (Same as Login but triggered after Loader)
+    useEffect(() => {
+        if (!loading) {
+            // Stage 1: Scale Check Logo
+            setTimeout(() => {
+                const logoContainer = document.querySelector('.logoContainer');
+                if (logoContainer) {
+                    logoContainer.style.transform = 'scale(1)';
+                }
+
+                // Stage 2: Logo In
+                setTimeout(() => {
+                    const logoMain = document.querySelector('.logo-main');
+                    if (logoMain) logoMain.classList.add('loadIn');
+
+                    // Stage 3: Text In
+                    setTimeout(() => {
+                        const logoText = document.querySelector('.logo-text');
+                        if (logoText) logoText.classList.add('loadIn');
+
+                        const payoff = document.querySelector('.logo-payoff');
+                        if (payoff) payoff.classList.add('loadIn');
+
+                        // Stage 4: Expand Accept Container
+                        setTimeout(() => {
+                            const acceptContainer = document.querySelector('.acceptContainer');
+                            if (acceptContainer) {
+                                acceptContainer.classList.add('loadIn');
+                            }
+
+                            // Stage 5: Content In
+                            setTimeout(() => {
+                                const formElements = document.querySelectorAll('.app-item, .dashboard-title');
+                                formElements.forEach((el, index) => {
+                                    setTimeout(() => {
+                                        el.classList.add('loadIn');
+                                    }, index * 100);
+                                });
+                            }, 500);
+                        }, 500);
+                    }, 500);
+                }, 500);
+            }, 100);
+        }
+    }, [loading]);
+
     const apps = [
         {
             id: 1,
             title: 'Brand Profile',
-            description: 'AI-powered brand identity manager. Organize your assets, voice, and strategy guidelines.',
-            url: 'http://localhost:3000', // Update with real URL
-            icon: Briefcase
+            desc: 'Manage assets & voice',
+            url: 'http://localhost:3000',
+            icon: Briefcase,
+            active: true,
+            color: '#FF6B35'
         },
         {
             id: 2,
             title: 'CaptionFlow',
-            description: 'Generate engaging social media captions instantly using your brand voice.',
-            url: 'http://localhost:3001', // Update with real URL
-            icon: MessageSquare
+            desc: 'Generate captions',
+            url: 'http://localhost:3001',
+            icon: MessageSquare,
+            active: true,
+            color: '#B349C1'
         },
         {
             id: 3,
             title: 'Growth Analytics',
-            description: 'Track your growth and engagement metrics across all social platforms.',
+            desc: 'Coming Soon',
             url: '#',
             icon: Zap,
-            disabled: true
+            active: false,
+            color: '#666'
         }
     ];
 
     return (
-        <div className="min-h-screen relative">
-            <div className="ambient-light" />
-            <div className="grid-overlay" />
+        <>
+            {loading && <LoaderScreen onAnimationEnd={() => setLoading(false)} />}
 
-            {/* Navbar */}
-            <nav className="fixed top-0 w-full z-50 border-b border-white/10 bg-black/50 backdrop-blur-md">
-                <div className="container mx-auto px-6 h-20 flex items-center justify-between">
-                    <div className="flex items-center gap-3">
-                        <Logo size={40} />
-                        <span className="text-xl font-bold font-mono tracking-tight text-white">Bloom AI</span>
+            {!loading && (
+                <div id="login-body">
+                    <div id="container">
+                        <div id="inviteContainer">
+
+                            {/* Left Side: Brand & Payoff */}
+                            <div className="logoContainer">
+                                <div className="logo-main">
+                                    <Logo size={120} />
+                                </div>
+                                <div className="logo-text">Bloom AI</div>
+                                <div className="logo-payoff" style={{
+                                    marginTop: '10px',
+                                    color: '#aaa',
+                                    fontSize: '12px',
+                                    fontFamily: 'monospace',
+                                    opacity: 0,
+                                    transition: 'opacity 1s ease',
+                                    textAlign: 'center'
+                                }}>
+                                    "Fai fiorire i tuoi social"
+                                </div>
+                                <style>{`
+                    .logo-payoff.loadIn { opacity: 1; }
+                `}</style>
+                            </div>
+
+                            {/* Right Side: App List */}
+                            <div className="acceptContainer">
+                                <div className="h-full flex flex-col justify-center">
+                                    <h1 className="dashboard-title" style={{
+                                        opacity: 0,
+                                        position: 'relative',
+                                        left: '-20px',
+                                        transition: '0.5s ease',
+                                        marginBottom: '30px'
+                                    }}>
+                                        Select Tool
+                                    </h1>
+
+                                    <div className="formContainer">
+                                        {apps.map((app) => (
+                                            <div
+                                                key={app.id}
+                                                className="app-item formDiv"
+                                                style={{
+                                                    marginBottom: '15px',
+                                                    cursor: app.active ? 'pointer' : 'default',
+                                                    opacity: 0 // handled by JS loadIn
+                                                }}
+                                            >
+                                                <div
+                                                    onClick={() => app.active && window.open(app.url, '_blank')}
+                                                    className={`p-4 rounded-lg border border-white/5 bg-white/5 hover:bg-white/10 transition-all flex items-center justify-between group ${!app.active ? 'opacity-50' : ''}`}
+                                                >
+                                                    <div className="flex items-center gap-3">
+                                                        <app.icon size={20} color={app.color} />
+                                                        <div>
+                                                            <div className="text-white font-bold text-sm tracking-wide font-mono">{app.title}</div>
+                                                            <div className="text-[10px] text-gray-400">{app.desc}</div>
+                                                        </div>
+                                                    </div>
+                                                    {app.active && (
+                                                        <ExternalLink size={16} className="text-gray-500 group-hover:text-white transition-colors" />
+                                                    )}
+                                                </div>
+                                            </div>
+                                        ))}
+                                    </div>
+
+                                    <div className="app-item register" style={{ opacity: 0 }}>
+                                        <span className="text-xs text-gray-600">Logged in as Admin</span>
+                                    </div>
+
+                                    <style>{`
+                      .dashboard-title.loadIn, .app-item.loadIn {
+                          opacity: 1 !important;
+                          left: 0 !important;
+                      }
+                  `}</style>
+                                </div>
+                            </div>
+
+                        </div>
                     </div>
-                    <div className="flex items-center gap-4">
-                        <span className="text-sm font-mono text-green-400 flex items-center gap-2">
-                            <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
-                            SYSTEM ONLINE
-                        </span>
-                    </div>
                 </div>
-            </nav>
-
-            {/* Main Content */}
-            <main className="container mx-auto px-6 pt-32 pb-20 animate-reveal">
-                <div className="mb-12">
-                    <h1 className="text-4xl md:text-5xl font-bold mb-4 font-mono">My Apps</h1>
-                    <p className="text-gray-400 text-lg max-w-2xl">
-                        Access your suite of AI-powered marketing tools. Select a tool to launch.
-                    </p>
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {apps.map(app => (
-                        <AppCard
-                            key={app.id}
-                            title={app.title}
-                            description={app.description}
-                            url={app.url}
-                            icon={app.icon}
-                            disabled={app.disabled}
-                        />
-                    ))}
-                </div>
-            </main>
-        </div>
+            )}
+        </>
     );
 };
 
