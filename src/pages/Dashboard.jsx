@@ -9,7 +9,7 @@ import '../styles/Dashboard.css';
 const Dashboard = () => {
     const [loading, setLoading] = useState(true);
     const location = useLocation();
-    const username = location.state?.username || 'user';
+    const username = location.state?.username || 'user'; // Default to 'user'
     const isAdmin = username === 'admin';
 
     useEffect(() => {
@@ -80,10 +80,9 @@ const Dashboard = () => {
                             </div>
 
                             {/* Right Side: Split Text Links */}
-                            <div className="acceptContainer flex flex-col items-center justify-center">
-                                {/* Modified container for perfect vertical centering */}
-                                <div className="p-12 h-full flex flex-col justify-center w-full">
-                                    <h2 className="text-gray-500 font-mono mb-12 uppercase tracking-widest text-sm text-left">Select Application</h2>
+                            <div className="acceptContainer">
+                                <div className="h-full flex flex-col justify-center px-12 w-full">
+                                    {/* h-full and justify-center are key here for vertical alignment */}
 
                                     <nav className="dashboard-links" style={{ opacity: 0, transition: 'opacity 1s ease' }}>
 
@@ -112,9 +111,10 @@ const Dashboard = () => {
 
                                     </nav>
 
-                                    <div className="mt-auto pt-12 text-right">
-                                        <span className="text-xs font-mono text-gray-600">
-                                            Logged in as: <span className="text-[#FF6B35]">{username}</span> • v1.0.2
+                                    <div className="mt-24 text-right opacity-50">
+                                        {/* Added margin-top to separate footer from centered content */}
+                                        <span className="text-xs font-mono text-gray-600 uppercase tracking-wider">
+                                            System Online &bull; {username === 'admin' ? 'Admin Mode' : 'User Mode'}
                                         </span>
                                     </div>
                                 </div>

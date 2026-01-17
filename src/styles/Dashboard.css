@@ -14,7 +14,6 @@
     font-family: "Mona Sans", sans-serif;
     font-optical-sizing: auto;
     font-size: 3.5rem;
-    /* Increased size slightly */
     font-style: normal;
     font-variation-settings: "wdth" var(--font-width, 100);
     font-weight: 900;
@@ -38,81 +37,86 @@
     transform: translateY(-1em);
 }
 
-/* Override Container Size */
+/* Dashboard Container Size & Shiny Animation */
 #inviteContainer.dashboard-size {
     max-width: 1200px !important;
     width: 90vw !important;
     min-height: 700px !important;
     position: relative;
-    /* Remove shadow here as we will handle it with glow */
-    box-shadow: none;
-    border-radius: 20px;
-    /* Slight radius for the border effect */
-    background: #0A0A0A;
-    z-index: 1;
-    overflow: visible !important;
-    /* Allow glow to show */
-}
 
-/* Rotating Border Glow Effect */
-#inviteContainer.dashboard-size::before {
-    content: "";
-    position: absolute;
-    inset: -3px;
-    /* Allow border width */
+    /* Shiny Animation Properties */
+    border: 3px solid transparent;
     border-radius: 24px;
-    background: conic-gradient(from 0deg,
-            transparent 0deg,
-            transparent 80deg,
-            #FF6B35 120deg,
-            #B349C1 180deg,
-            transparent 240deg);
-    z-index: -1;
-    animation: rotate-border 4s linear infinite;
-    filter: blur(10px);
-    opacity: 0.8;
+    background-color: #0A0A0A;
+
+    /* Double Gradient: 1. Inner Content, 2. Border Gradient */
+    background-image:
+        linear-gradient(#0A0A0A, #0A0A0A),
+        linear-gradient(125deg, rgba(255, 255, 255, 0) 30%, #FF6B35 45%, #B349C1 50%, #FF6B35 55%, rgba(255, 255, 255, 0) 70%);
+
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+    background-size: 100% 100%, 100% 200%;
+    /* Explicit sizes for each image */
+    background-position: 0 0, 0 -250px;
+
+    animation: border-glint 4s linear infinite;
+
+    box-shadow: 0px 0px 50px rgba(0, 0, 0, 0.8);
+    overflow: hidden !important;
 }
 
-/* Inner Background to cover the gradient in the middle */
+/* Inner Surface Glint */
 #inviteContainer.dashboard-size::after {
-    content: "";
+    content: ' ';
     position: absolute;
-    inset: 0;
-    border-radius: 20px;
-    background: #0A0A0A;
-    z-index: -1;
+    top: -50%;
+    left: -120%;
+    width: 200%;
+    height: 200%;
+    background-image: linear-gradient(125deg, rgba(255, 255, 255, 0) 30%, rgba(255, 107, 53, 0.1) 45%, rgba(179, 73, 193, 0.1) 50%, rgba(255, 255, 255, 0) 52%);
+    animation: glint 4s linear infinite;
+    pointer-events: none;
+    z-index: 10;
 }
 
-@keyframes rotate-border {
-    from {
-        transform: rotate(0deg);
+@keyframes glint {
+    0% {
+        left: -120%;
     }
 
-    to {
-        transform: rotate(360deg);
+    20% {
+        left: 100%;
+    }
+
+    100% {
+        left: 100%;
     }
 }
 
-/* Allow overflow visible on children to not clip */
-#inviteContainer.dashboard-size .logoContainer,
-#inviteContainer.dashboard-size .acceptContainer {
-    border-radius: 20px;
-    z-index: 2;
-    /* Sit above the background */
-    background: transparent;
-    /* See through to the ::after background */
+@keyframes border-glint {
+    0% {
+        background-position: 0 0, 0 -250px;
+    }
+
+    100% {
+        background-position: 0 0, 0 400px;
+    }
 }
 
-/* Ensure Logo Container background is managed */
+/* Layout Overrides */
 #inviteContainer.dashboard-size .logoContainer {
+    width: 40% !important;
     background: linear-gradient(135deg, rgba(255, 107, 53, 0.05) 0%, rgba(179, 73, 193, 0.05) 100%);
-    border-top-left-radius: 20px;
-    border-bottom-left-radius: 20px;
+    border-right: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 #inviteContainer.dashboard-size .acceptContainer {
     width: 60% !important;
     background: transparent;
-    border-top-right-radius: 20px;
-    border-bottom-right-radius: 20px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* Ensure internal centering */
 }
