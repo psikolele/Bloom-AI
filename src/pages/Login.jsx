@@ -102,9 +102,7 @@ const Login = () => {
                         <div className="logo-main">
                             <Logo size={120} />
                         </div>
-                        <div className="logo-text" style={{ marginTop: '1rem' }}>
-                            <img src="/bloom-text.png" alt="Bloom AI" style={{ height: '40px', objectFit: 'contain' }} />
-                        </div>
+                        {/* Logo Text Removed */}
                     </div>
 
                     {/* Accept Container (Right/Form) */}

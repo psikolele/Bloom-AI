@@ -21,12 +21,13 @@ const Logo = ({ size = 60 }) => {
                 src="/bloom-icon.png"
                 alt="Bloom AI Logo"
                 style={{
-                    width: '96%', /* Filled to eliminate gap - increased from 85% */
-                    height: '96%',
+                    width: '100%',
+                    height: '100%',
                     objectFit: 'contain',
                     position: 'relative',
                     zIndex: 2,
-                    borderRadius: '50%'
+                    borderRadius: '50%',
+                    transform: 'scale(1.15)' /* Slightly larger to bridge the gap completely */
                 }}
             />
 
