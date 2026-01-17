@@ -1,20 +1,19 @@
 import React, { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom'; // Import useLocation
+import { useLocation } from 'react-router-dom';
 import Logo from '../components/Logo';
 import LoaderScreen from '../components/LoaderScreen';
 import SplitLink from '../components/SplitLink';
-import '../styles/Login.css'; // Base styles
-import '../styles/Dashboard.css'; // Specific dashboard overrides
+import '../styles/Login.css';
+import '../styles/Dashboard.css';
 
 const Dashboard = () => {
     const [loading, setLoading] = useState(true);
     const location = useLocation();
-    const username = location.state?.username || 'user'; // Default to 'user' if direct access
+    const username = location.state?.username || 'user';
     const isAdmin = username === 'admin';
 
     useEffect(() => {
         if (!loading) {
-            // Animation Sequence
             setTimeout(() => {
                 const logoContainer = document.querySelector('.logoContainer');
                 if (logoContainer) logoContainer.style.transform = 'scale(1)';
@@ -31,7 +30,6 @@ const Dashboard = () => {
                             if (acceptContainer) acceptContainer.classList.add('loadIn');
 
                             setTimeout(() => {
-                                // Fade in links
                                 const links = document.querySelector('.dashboard-links');
                                 if (links) links.style.opacity = 1;
                             }, 500);
@@ -49,7 +47,6 @@ const Dashboard = () => {
             {!loading && (
                 <div id="login-body">
                     <div id="container">
-                        {/* Added dashboard-size class for larger layout */}
                         <div id="inviteContainer" className="dashboard-size">
 
                             {/* Left Side: Brand */}
@@ -57,7 +54,17 @@ const Dashboard = () => {
                                 <div className="logo-main">
                                     <Logo size={160} />
                                 </div>
-                                <div className="logo-text" style={{ fontSize: '3rem' }}>Bloom AI</div>
+                                <div
+                                    className="logo-text"
+                                    style={{
+                                        fontSize: '3rem',
+                                        background: 'linear-gradient(135deg, #FF9B6B 0%, #FF7B4D 25%, #5B9FE3 50%, #B349C1 100%)',
+                                        WebkitBackgroundClip: 'text',
+                                        WebkitTextFillColor: 'transparent',
+                                    }}
+                                >
+                                    Bloom AI
+                                </div>
                                 <div className="logo-payoff" style={{
                                     marginTop: '15px',
                                     color: '#aaa',
@@ -73,9 +80,10 @@ const Dashboard = () => {
                             </div>
 
                             {/* Right Side: Split Text Links */}
-                            <div className="acceptContainer flex flex-col justify-center">
-                                <div className="p-12 h-full flex flex-col justify-center">
-                                    <h2 className="text-gray-500 font-mono mb-12 uppercase tracking-widest text-sm">Select Application</h2>
+                            <div className="acceptContainer flex flex-col items-center justify-center">
+                                {/* Modified container for perfect vertical centering */}
+                                <div className="p-12 h-full flex flex-col justify-center w-full">
+                                    <h2 className="text-gray-500 font-mono mb-12 uppercase tracking-widest text-sm text-left">Select Application</h2>
 
                                     <nav className="dashboard-links" style={{ opacity: 0, transition: 'opacity 1s ease' }}>
 
@@ -106,7 +114,7 @@ const Dashboard = () => {
 
                                     <div className="mt-auto pt-12 text-right">
                                         <span className="text-xs font-mono text-gray-600">
-                                            Logged in as: <span className="text-[#FF6B35]">{username}</span> • v1.0.1
+                                            Logged in as: <span className="text-[#FF6B35]">{username}</span> • v1.0.2
                                         </span>
                                     </div>
                                 </div>

@@ -5,26 +5,23 @@
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
-    /* Increased spacing */
     align-items: flex-start;
 }
 
 .split-link {
     color: #f4f4ed;
-    /* Light cream to match reference */
     display: flex;
     font-family: "Mona Sans", sans-serif;
     font-optical-sizing: auto;
-    font-size: 3rem;
-    /* Larger CTA size */
+    font-size: 3.5rem;
+    /* Increased size slightly */
     font-style: normal;
     font-variation-settings: "wdth" var(--font-width, 100);
     font-weight: 900;
-    line-height: 0.9;
+    line-height: 1;
     overflow: hidden;
     text-decoration: none;
     text-shadow: 0 1em 0 #B349C1;
-    /* Using Brand Purple for shadow/reveal color */
     text-transform: uppercase;
     cursor: pointer;
     transition: color 0.3s ease;
@@ -32,7 +29,6 @@
 
 .split-link span {
     display: inline-block;
-    /* transition: 300ms translate cubic-bezier(0.2, 0, 0.5, 1); */
     transition: transform 300ms cubic-bezier(0.2, 0, 0.5, 1);
     transform: translateY(0);
     transition-delay: calc(40ms + var(--char, 0) * 20ms);
@@ -40,7 +36,6 @@
 
 .split-link:hover span {
     transform: translateY(-1em);
-    /* Move up to reveal shadow text */
 }
 
 /* Override Container Size */
@@ -48,16 +43,76 @@
     max-width: 1200px !important;
     width: 90vw !important;
     min-height: 700px !important;
+    position: relative;
+    /* Remove shadow here as we will handle it with glow */
+    box-shadow: none;
+    border-radius: 20px;
+    /* Slight radius for the border effect */
+    background: #0A0A0A;
+    z-index: 1;
+    overflow: visible !important;
+    /* Allow glow to show */
 }
 
-/* Adjust Accept Container width for larger layout */
+/* Rotating Border Glow Effect */
+#inviteContainer.dashboard-size::before {
+    content: "";
+    position: absolute;
+    inset: -3px;
+    /* Allow border width */
+    border-radius: 24px;
+    background: conic-gradient(from 0deg,
+            transparent 0deg,
+            transparent 80deg,
+            #FF6B35 120deg,
+            #B349C1 180deg,
+            transparent 240deg);
+    z-index: -1;
+    animation: rotate-border 4s linear infinite;
+    filter: blur(10px);
+    opacity: 0.8;
+}
+
+/* Inner Background to cover the gradient in the middle */
+#inviteContainer.dashboard-size::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 20px;
+    background: #0A0A0A;
+    z-index: -1;
+}
+
+@keyframes rotate-border {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Allow overflow visible on children to not clip */
+#inviteContainer.dashboard-size .logoContainer,
+#inviteContainer.dashboard-size .acceptContainer {
+    border-radius: 20px;
+    z-index: 2;
+    /* Sit above the background */
+    background: transparent;
+    /* See through to the ::after background */
+}
+
+/* Ensure Logo Container background is managed */
+#inviteContainer.dashboard-size .logoContainer {
+    background: linear-gradient(135deg, rgba(255, 107, 53, 0.05) 0%, rgba(179, 73, 193, 0.05) 100%);
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+}
+
 #inviteContainer.dashboard-size .acceptContainer {
     width: 60% !important;
-    /* Take more space */
-    background: #0A0A0A;
-}
-
-/* Adjust Logo Container width */
-#inviteContainer.dashboard-size .logoContainer {
-    width: 40% !important;
+    background: transparent;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
 }
