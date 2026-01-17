@@ -150,7 +150,9 @@ const Login = () => {
                                     </button>
                                     <div className="register">
                                         Need an account?
-                                        <a href="#">Register</a>
+                                        <a href="#" onClick={(e) => { e.preventDefault(); navigate('/register'); }}>
+                                            Register
+                                        </a>
                                     </div>
                                 </div>
                             </div>
