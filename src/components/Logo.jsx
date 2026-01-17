@@ -1,47 +1,73 @@
 import React from 'react';
 
-const Logo = ({ size = 40, className = '' }) => {
+const Logo = ({ size = 60 }) => {
     return (
-        <svg
-            width={size}
-            height={size}
-            viewBox="0 0 100 100"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            className={className}
+        <div
+            className="logo-wrapper"
+            style={{
+                width: size,
+                height: size,
+                position: 'relative',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center'
+            }}
         >
-            <defs>
-                <linearGradient id="logoLimit" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" stopColor="#FF9B6B" />
-                    <stop offset="25%" stopColor="#FF7B4D" />
-                    <stop offset="50%" stopColor="#5B9FE3" />
-                    <stop offset="100%" stopColor="#B349C1" />
-                </linearGradient>
-                <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
-                    <feGaussianBlur stdDeviation="2" result="blur" />
-                    <feComposite in="SourceGraphic" in2="blur" operator="over" />
-                </filter>
-            </defs>
+            {/* Rotating Light Ring */}
+            <div className="logo-glow-ring"></div>
 
-            {/* Outer Circle with Gradient */}
-            <circle cx="50" cy="50" r="45" stroke="url(#logoLimit)" strokeWidth="4" />
-
-            {/* Orbital Dots and Lines */}
-            <g stroke="white" strokeWidth="1" opacity="0.6">
-                <circle cx="50" cy="50" r="30" fill="none" strokeDasharray="4 4" />
-                <circle cx="50" cy="20" r="3" fill="white" />
-                <circle cx="80" cy="50" r="3" fill="white" />
-                <circle cx="50" cy="80" r="3" fill="white" />
-                <circle cx="20" cy="50" r="3" fill="white" />
-            </g>
-
-            {/* Central Lightning Bolt */}
-            <path
-                d="M55 25 L40 55 L55 50 L45 75 L65 45 L50 50 Z"
-                fill="white"
-                filter="url(#glow)"
+            {/* The Pictogram Image */}
+            <img
+                src="/bloom-icon.png"
+                alt="Bloom AI Logo"
+                style={{
+                    width: '85%', /* Slightly smaller to fit inside ring */
+                    height: '85%',
+                    objectFit: 'contain',
+                    position: 'relative',
+                    zIndex: 2,
+                    borderRadius: '50%' /* Ensure image clip if needed */
+                }}
             />
-        </svg>
+
+            <style>{`
+            .logo-wrapper {
+                border-radius: 50%;
+                /* box-shadow: 0 0 30px rgba(255, 107, 53, 0.2); Optional ambient glow */
+            }
+
+            .logo-glow-ring {
+                position: absolute;
+                inset: -2px; /* Ring thickness/offset */
+                border-radius: 50%;
+                background: conic-gradient(
+                    from 0deg,
+                    transparent 0%,
+                    transparent 40%,
+                    #FF6B35 50%,    /* Brand Orange */
+                    #B349C1 60%,    /* Brand Purple */
+                    transparent 70%
+                );
+                animation: spin-logo 3s linear infinite;
+                z-index: 1;
+                filter: blur(2px); /* Soft light effect */
+            }
+
+            /* Inner mask to define ring width */
+            .logo-glow-ring::after {
+                content: '';
+                position: absolute;
+                inset: 2px; /* Thickness of the light beam */
+                background: #0A0A0A; /* Match bg to hide center */
+                border-radius: 50%;
+            }
+
+            @keyframes spin-logo {
+                from { transform: rotate(0deg); }
+                to { transform: rotate(360deg); }
+            }
+        `}</style>
+        </div>
     );
 };
 

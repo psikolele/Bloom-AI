@@ -24,19 +24,7 @@ const LoaderScreen = ({ onAnimationEnd }) => {
                     <Logo size={120} />
                 </div>
 
-                {/* Brand Text */}
-                <div
-                    className="mt-8 font-mono text-3xl font-bold opacity-0 tracking-widest uppercase"
-                    style={{
-                        animation: 'fadeIn 1s ease-out forwards 0.5s',
-                        fontFamily: '"Space Grotesk", sans-serif',
-                        background: 'linear-gradient(135deg, #FF9B6B 0%, #FF7B4D 25%, #5B9FE3 50%, #B349C1 100%)',
-                        WebkitBackgroundClip: 'text',
-                        WebkitTextFillColor: 'transparent',
-                    }}
-                >
-                    Bloom AI
-                </div>
+                {/* Brand Text Removed as per request (Icon Only) */}
             </div>
 
             <style>{`

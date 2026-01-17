@@ -60,13 +60,12 @@ const Dashboard = () => {
                                 <div
                                     className="logo-text"
                                     style={{
-                                        fontSize: '3rem',
-                                        background: 'linear-gradient(135deg, #FF9B6B 0%, #FF7B4D 25%, #5B9FE3 50%, #B349C1 100%)',
-                                        WebkitBackgroundClip: 'text',
-                                        WebkitTextFillColor: 'transparent',
+                                        marginTop: '1rem',
+                                        display: 'flex',
+                                        justifyContent: 'center'
                                     }}
                                 >
-                                    Bloom AI
+                                    <img src="/bloom-text.png" alt="Bloom AI" style={{ height: '50px', objectFit: 'contain' }} />
                                 </div>
                                 <div className="logo-payoff" style={{
                                     marginTop: '15px',

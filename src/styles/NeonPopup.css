@@ -57,10 +57,28 @@
     border-radius: 9999px;
     background-color: rgba(220, 38, 38, 0.2);
     border: 1px solid #DC2626;
-    box-shadow: 0 0 20px rgba(220, 38, 38, 0.4);
+    box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.7);
     display: flex;
     align-items: center;
     justify-content: center;
+    animation: pulse-red 2s infinite;
+}
+
+@keyframes pulse-red {
+    0% {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.7);
+    }
+
+    70% {
+        transform: scale(1);
+        box-shadow: 0 0 0 10px rgba(220, 38, 38, 0);
+    }
+
+    100% {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 rgba(220, 38, 38, 0);
+    }
 }
 
 .neon-popup-icon {
