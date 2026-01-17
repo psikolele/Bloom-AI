@@ -76,14 +76,14 @@
 }
 
 /* 2. The Inner Mask (The Content Background) */
-/* This covers the spinning gradient everywhere except the 3px edge */
+/* This covers the spinning gradient everywhere except the 1px edge */
 #inviteContainer.dashboard-size::after {
     content: "";
     position: absolute;
-    inset: 3px;
-    /* Defines border width */
-    border-radius: 21px;
-    /* 24px - 3px = 21px for perfect nesting */
+    inset: 1px;
+    /* Thinner border */
+    border-radius: 23px;
+    /* 24px - 1px = 23px */
     background: #0A0A0A;
     z-index: -1;
 }
@@ -102,9 +102,9 @@
 /* Placed INSIDE the Inner Mask area so it ignores the border */
 .glint-overlay {
     position: absolute;
-    inset: 3px;
+    inset: 1px;
     /* Match the Inner Mask */
-    border-radius: 21px;
+    border-radius: 23px;
     pointer-events: none;
     overflow: hidden;
     z-index: 10;
