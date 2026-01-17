@@ -76,11 +76,11 @@ const Login = () => {
             <div
                 className="flex rounded-lg overflow-hidden shadow-2xl relative z-10 transition-all duration-700 ease-out"
                 style={{
-                    width: logoScale ? '680px' : '0px',
-                    height: logoScale ? '431.5px' : '0px',
+                    width: '680px',
+                    height: '431.5px',
                     boxShadow: '0 20px 60px rgba(0,0,0,0.8)',
                     opacity: logoScale ? 1 : 0,
-                    transform: logoScale ? 'scale(1)' : 'scale(0.9)'
+                    transform: logoScale ? 'scale(1)' : 'scale(0.8)'
                 }}>
 
                 {/* Logo Panel - Left Side */}
