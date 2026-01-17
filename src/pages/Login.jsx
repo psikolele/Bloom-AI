@@ -141,7 +141,7 @@ const Login = () => {
             <div className="absolute inset-0 opacity-10 pointer-events-none grid-overlay" />
 
             {/* Main Glassmorphic Card Container */}
-            <div className="w-[1000px] max-w-[95vw] h-[650px] max-h-[90vh] rounded-[40px] overflow-hidden shadow-2xl flex relative z-10 backdrop-blur-xl"
+            <div className="w-[800px] max-w-[50vw] h-[600px] max-h-[85vh] rounded-[40px] overflow-hidden shadow-2xl flex relative z-10 backdrop-blur-xl"
                 style={{
                     background: 'rgba(10, 10, 10, 0.4)',
                     border: '1px solid rgba(255, 255, 255, 0.08)',
@@ -150,7 +150,7 @@ const Login = () => {
                 }}>
 
                 {/* Left Side - Form Section with Glassmorphism */}
-                <div className="w-1/2 p-14 flex flex-col justify-center relative backdrop-blur-md"
+                <div className="w-1/2 p-10 flex flex-col justify-center relative backdrop-blur-md"
                     style={{
                         background: 'linear-gradient(135deg, rgba(15, 15, 15, 0.9) 0%, rgba(10, 10, 10, 0.95) 100%)',
                         borderRight: '1px solid rgba(255, 255, 255, 0.05)'
@@ -162,8 +162,8 @@ const Login = () => {
                             style={{ animationDuration: '4s' }} />
                     </div>
 
-                    <div className="mb-12 relative z-10 animate-slide-up">
-                        <div className="flex items-center gap-3 mb-10">
+                    <div className="mb-8 relative z-10 animate-slide-up">
+                        <div className="flex items-center gap-3 mb-8">
                             <div className="animate-glow-pulse">
                                 <Logo size={40} />
                             </div>
@@ -177,7 +177,7 @@ const Login = () => {
                                 Bloom AI
                             </span>
                         </div>
-                        <h2 className="text-5xl font-bold text-white mb-3 font-mono tracking-tight">Welcome Back</h2>
+                        <h2 className="text-4xl font-bold text-white mb-3 font-mono tracking-tight">Welcome Back</h2>
                         <p className="text-gray-400 text-base">Please enter your details to access the hub.</p>
                     </div>
 
@@ -270,22 +270,28 @@ const Login = () => {
                             <NeonButton
                                 type="submit"
                                 disabled={isLoading}
-                                className="w-full rounded-2xl py-4 text-base font-bold shadow-lg shadow-orange-500/20 relative overflow-hidden group"
+                                className="w-full rounded-2xl py-4 text-base font-bold shadow-lg shadow-orange-500/30 hover:shadow-orange-500/50 relative overflow-hidden group transition-all duration-300"
                                 style={{
-                                    opacity: isLoading ? 0.7 : 1
+                                    opacity: isLoading ? 0.7 : 1,
+                                    transform: isLoading ? 'scale(0.98)' : 'scale(1)'
                                 }}
                             >
-                                {isLoading ? (
-                                    <span className="flex items-center justify-center gap-3">
-                                        <svg className="animate-spin h-5 w-5" viewBox="0 0 24 24">
-                                            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
-                                            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
-                                        </svg>
-                                        Loading...
-                                    </span>
-                                ) : (
-                                    'Log in'
-                                )}
+                                {/* Shimmer effect overlay */}
+                                <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-in-out pointer-events-none" />
+
+                                <span className="relative z-10">
+                                    {isLoading ? (
+                                        <span className="flex items-center justify-center gap-3">
+                                            <svg className="animate-spin h-5 w-5" viewBox="0 0 24 24">
+                                                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
+                                                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+                                            </svg>
+                                            Loading...
+                                        </span>
+                                    ) : (
+                                        'Log in'
+                                    )}
+                                </span>
                             </NeonButton>
                         </div>
                     </form>
@@ -342,7 +348,7 @@ const Login = () => {
                             <FlowerAnimation />
                         </div>
 
-                        <h1 className="text-4xl font-bold text-white mb-4 font-mono tracking-tight animate-slide-up"
+                        <h1 className="text-3xl font-bold text-white mb-4 font-mono tracking-tight animate-slide-up"
                             style={{
                                 animationDelay: '0.4s',
                                 textShadow: '0 0 40px rgba(255, 107, 53, 0.3)'
@@ -350,7 +356,7 @@ const Login = () => {
                             Fai sbocciare il tuo business online
                         </h1>
 
-                        <p className="text-white/70 text-lg max-w-md leading-relaxed animate-slide-up"
+                        <p className="text-white/70 text-base max-w-sm leading-relaxed animate-slide-up"
                             style={{ animationDelay: '0.6s' }}>
                             Accedi al tuo hub di intelligenza marketing e scopri il potenziale del tuo brand.
                         </p>
