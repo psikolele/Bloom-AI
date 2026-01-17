@@ -13,26 +13,20 @@ const Login = () => {
     const [logoScale, setLogoScale] = useState(false);
     const [logoVisible, setLogoVisible] = useState(false);
     const [textVisible, setTextVisible] = useState(false);
-    const [formHeight, setFormHeight] = useState(false);
-    const [formVisible, setFormVisible] = useState(false);
     const [fieldsVisible, setFieldsVisible] = useState(false);
 
     // Progressive animation on mount
     useEffect(() => {
         const timer1 = setTimeout(() => setLogoScale(true), 100);
-        const timer2 = setTimeout(() => setLogoVisible(true), 800);
-        const timer3 = setTimeout(() => setTextVisible(true), 1300);
-        const timer4 = setTimeout(() => setFormHeight(true), 1800);
-        const timer5 = setTimeout(() => setFormVisible(true), 2300);
-        const timer6 = setTimeout(() => setFieldsVisible(true), 2800);
+        const timer2 = setTimeout(() => setLogoVisible(true), 600);
+        const timer3 = setTimeout(() => setTextVisible(true), 1000);
+        const timer4 = setTimeout(() => setFieldsVisible(true), 1400);
 
         return () => {
             clearTimeout(timer1);
             clearTimeout(timer2);
             clearTimeout(timer3);
             clearTimeout(timer4);
-            clearTimeout(timer5);
-            clearTimeout(timer6);
         };
     }, []);
 
@@ -78,19 +72,23 @@ const Login = () => {
             {/* Dark Overlay */}
             <div className="absolute inset-0 bg-black/60" />
 
-            {/* Two-Panel Login Container */}
-            <div className="flex rounded-lg overflow-hidden shadow-2xl relative z-10"
+            {/* Two-Panel Login Container - Fixed Dimensions */}
+            <div
+                className="flex rounded-lg overflow-hidden shadow-2xl relative z-10 transition-all duration-700 ease-out"
                 style={{
-                    boxShadow: '0 20px 60px rgba(0,0,0,0.8)'
+                    width: logoScale ? '680px' : '0px',
+                    height: logoScale ? '431.5px' : '0px',
+                    boxShadow: '0 20px 60px rgba(0,0,0,0.8)',
+                    opacity: logoScale ? 1 : 0,
+                    transform: logoScale ? 'scale(1)' : 'scale(0.9)'
                 }}>
 
                 {/* Logo Panel - Left Side */}
                 <div
-                    className="relative overflow-hidden flex items-center justify-center flex-col px-12 py-12 transition-all duration-700 ease-out"
+                    className="relative overflow-hidden flex items-center justify-center flex-col px-12 py-12"
                     style={{
-                        width: logoScale ? '280px' : '0px',
-                        transform: logoScale ? 'scale(1)' : 'scale(0)',
-                        transformOrigin: 'center'
+                        width: '280px',
+                        minWidth: '280px'
                     }}
                 >
                     {/* Blurred background */}
@@ -142,11 +140,10 @@ const Login = () => {
 
                 {/* Form Panel - Right Side */}
                 <div
-                    className="relative overflow-hidden transition-all duration-500 ease-out"
+                    className="relative overflow-hidden"
                     style={{
                         width: '400px',
-                        height: formHeight ? '431.5px' : '0px',
-                        opacity: formHeight ? 1 : 0
+                        minWidth: '400px'
                     }}
                 >
                     {/* Blurred background */}
@@ -163,13 +160,7 @@ const Login = () => {
                     <div className="absolute inset-0 bg-black/75 backdrop-blur-md" />
 
                     {/* Form Content */}
-                    <div
-                        className="relative z-10 p-12 h-full transition-all duration-500 ease-out"
-                        style={{
-                            opacity: formVisible ? 1 : 0,
-                            marginLeft: formVisible ? '0' : '-400px'
-                        }}
-                    >
+                    <div className="relative z-10 p-12 h-full">
                         <form onSubmit={handleSubmit} className="h-full flex flex-col">
                             {/* Title */}
                             <h1
