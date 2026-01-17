@@ -140,13 +140,14 @@ const Login = () => {
             {/* Animated Grid Overlay */}
             <div className="absolute inset-0 opacity-10 pointer-events-none grid-overlay" />
 
-            {/* Main Glassmorphic Card Container */}
-            <div className="w-[800px] max-w-[50vw] h-[600px] max-h-[85vh] rounded-[40px] overflow-hidden shadow-2xl flex relative z-10 backdrop-blur-xl"
+            {/* Main Glassmorphic Card Container - Compact Centered Box */}
+            <div className="w-[900px] max-w-[90vw] h-auto rounded-[40px] overflow-hidden shadow-2xl flex relative z-10 backdrop-blur-xl"
                 style={{
                     background: 'rgba(10, 10, 10, 0.4)',
                     border: '1px solid rgba(255, 255, 255, 0.08)',
                     boxShadow: '0 0 80px rgba(255, 107, 53, 0.15), 0 0 0 1px rgba(0, 0, 0, 0.5), inset 0 0 60px rgba(255, 255, 255, 0.02)',
-                    animation: 'reveal 0.8s ease-out, scale-in 0.8s ease-out'
+                    animation: 'reveal 0.8s ease-out, scale-in 0.8s ease-out',
+                    margin: '2rem'
                 }}>
 
                 {/* Left Side - Form Section with Glassmorphism */}
