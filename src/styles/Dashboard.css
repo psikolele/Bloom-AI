@@ -43,64 +43,85 @@
     width: 90vw !important;
     min-height: 700px !important;
     position: relative;
-
-    /* Shiny Animation Properties */
-    border: 3px solid transparent;
     border-radius: 24px;
     background-color: #0A0A0A;
-
-    /* Double Gradient: 1. Inner Content, 2. Border Gradient */
-    background-image:
-        linear-gradient(#0A0A0A, #0A0A0A),
-        linear-gradient(125deg, rgba(255, 255, 255, 0) 30%, #FF6B35 45%, #B349C1 50%, #FF6B35 55%, rgba(255, 255, 255, 0) 70%);
-
-    background-origin: border-box;
-    background-clip: padding-box, border-box;
-    background-size: 100% 100%, 100% 200%;
-    /* Explicit sizes for each image */
-    background-position: 0 0, 0 -250px;
-
-    animation: border-glint 4s linear infinite;
-
     box-shadow: 0px 0px 50px rgba(0, 0, 0, 0.8);
-    overflow: hidden !important;
+    /* No border or animation on the container itself directly, handled by pseudo elements */
+    z-index: 1;
 }
 
-/* Inner Surface Glint */
+/* Rotating Gradient Border (The "Snake" Effect) */
+#inviteContainer.dashboard-size::before {
+    content: "";
+    position: absolute;
+    inset: -3px;
+    /* Border thickness */
+    border-radius: 26px;
+    /* Slightly larger than container */
+    background: conic-gradient(from 0deg,
+            transparent 0%,
+            transparent 50%,
+            #FF6B35 75%,
+            #B349C1 100%);
+    z-index: -1;
+    animation: rotate-border 6s linear infinite;
+    /* Slower and Linear as requested */
+}
+
+/* Inner Mask to hide the center of the conic gradient */
 #inviteContainer.dashboard-size::after {
-    content: ' ';
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 24px;
+    background: #0A0A0A;
+    /* Matches page background */
+    z-index: -1;
+}
+
+@keyframes rotate-border {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Inner Surface Glint (Optional aesthetic addition) */
+.glint-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 24px;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 10;
+}
+
+.glint-overlay::after {
+    content: '';
     position: absolute;
     top: -50%;
     left: -120%;
     width: 200%;
     height: 200%;
-    background-image: linear-gradient(125deg, rgba(255, 255, 255, 0) 30%, rgba(255, 107, 53, 0.1) 45%, rgba(179, 73, 193, 0.1) 50%, rgba(255, 255, 255, 0) 52%);
-    animation: glint 4s linear infinite;
-    pointer-events: none;
-    z-index: 10;
+    background-image: linear-gradient(125deg, rgba(255, 255, 255, 0) 40%, rgba(255, 255, 255, 0.05) 50%, rgba(255, 255, 255, 0) 60%);
+    animation: shine 8s linear infinite;
 }
 
-@keyframes glint {
+@keyframes shine {
     0% {
         left: -120%;
     }
 
-    20% {
-        left: 100%;
-    }
-
     100% {
         left: 100%;
-    }
-}
-
-@keyframes border-glint {
-    0% {
-        background-position: 0 0, 0 -250px;
-    }
-
-    100% {
-        background-position: 0 0, 0 400px;
     }
 }
 
@@ -109,6 +130,8 @@
     width: 40% !important;
     background: linear-gradient(135deg, rgba(255, 107, 53, 0.05) 0%, rgba(179, 73, 193, 0.05) 100%);
     border-right: 1px solid rgba(255, 255, 255, 0.05);
+    border-top-left-radius: 24px;
+    border-bottom-left-radius: 24px;
 }
 
 #inviteContainer.dashboard-size .acceptContainer {
@@ -118,5 +141,6 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    /* Ensure internal centering */
+    border-top-right-radius: 24px;
+    border-bottom-right-radius: 24px;
 }

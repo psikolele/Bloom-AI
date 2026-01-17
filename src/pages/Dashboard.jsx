@@ -49,6 +49,9 @@ const Dashboard = () => {
                     <div id="container">
                         <div id="inviteContainer" className="dashboard-size">
 
+                            {/* NEW: Glint Overlay for surface shine */}
+                            <div className="glint-overlay"></div>
+
                             {/* Left Side: Brand */}
                             <div className="logoContainer">
                                 <div className="logo-main">
