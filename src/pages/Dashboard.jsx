@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom'; // Import useLocation
 import Logo from '../components/Logo';
 import LoaderScreen from '../components/LoaderScreen';
 import SplitLink from '../components/SplitLink';
@@ -7,10 +8,13 @@ import '../styles/Dashboard.css'; // Specific dashboard overrides
 
 const Dashboard = () => {
     const [loading, setLoading] = useState(true);
+    const location = useLocation();
+    const username = location.state?.username || 'user'; // Default to 'user' if direct access
+    const isAdmin = username === 'admin';
 
     useEffect(() => {
         if (!loading) {
-            // Animation Sequence (Same as before but tailored)
+            // Animation Sequence
             setTimeout(() => {
                 const logoContainer = document.querySelector('.logoContainer');
                 if (logoContainer) logoContainer.style.transform = 'scale(1)';
@@ -74,34 +78,35 @@ const Dashboard = () => {
                                     <h2 className="text-gray-500 font-mono mb-12 uppercase tracking-widest text-sm">Select Application</h2>
 
                                     <nav className="dashboard-links" style={{ opacity: 0, transition: 'opacity 1s ease' }}>
-                                        <SplitLink
-                                            href="http://localhost:3000"
-                                            fontWidth={125}
-                                        >
-                                            Brand Profile
-                                        </SplitLink>
 
                                         <SplitLink
-                                            href="http://localhost:3001"
-                                            fontWidth={110}
+                                            href="https://caption-flow-nu.vercel.app/"
+                                            fontWidth={125}
                                         >
                                             CaptionFlow
                                         </SplitLink>
 
-                                        <div className="opacity-50 pointer-events-none">
+                                        <SplitLink
+                                            href="https://social-media-client-sooty-ten.vercel.app/"
+                                            fontWidth={110}
+                                        >
+                                            MarketingFlow
+                                        </SplitLink>
+
+                                        {isAdmin && (
                                             <SplitLink
-                                                href="#"
-                                                fontWidth={100}
+                                                href="https://web-app-brand-profile.vercel.app/"
+                                                fontWidth={115}
                                             >
-                                                Growth Analytics
+                                                Brand Profile
                                             </SplitLink>
-                                            <span className="text-xs font-mono text-gray-500 mt-1 block">COMING SOON</span>
-                                        </div>
+                                        )}
+
                                     </nav>
 
                                     <div className="mt-auto pt-12 text-right">
                                         <span className="text-xs font-mono text-gray-600">
-                                            System Online • v1.0.0
+                                            Logged in as: <span className="text-[#FF6B35]">{username}</span> • v1.0.1
                                         </span>
                                     </div>
                                 </div>

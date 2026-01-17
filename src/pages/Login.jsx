@@ -49,7 +49,7 @@ const Login = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         if (credentials.username === 'admin' && credentials.password === 'admin') {
-            navigate('/dashboard');
+            navigate('/dashboard', { state: { username: credentials.username } });
         } else {
             alert('Invalid credentials (use admin/admin)');
         }
