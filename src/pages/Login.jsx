@@ -7,7 +7,7 @@ import Logo from '../components/Logo';
 // Enhanced Flower Animation with more petals and glow
 const FlowerAnimation = () => (
     <div className="relative">
-        <svg width="250" height="250" viewBox="0 0 100 100" className="mx-auto relative z-10">
+        <svg width="200" height="200" viewBox="0 0 100 100" className="mx-auto relative z-10">
             <g className="origin-center" style={{ animation: 'bloom-petals 4s ease-out forwards' }}>
                 {/* Outer petals layer */}
                 {[0, 30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330].map((angle, i) => (
@@ -140,18 +140,17 @@ const Login = () => {
             {/* Animated Grid Overlay */}
             <div className="absolute inset-0 opacity-10 pointer-events-none grid-overlay" />
 
-            {/* Main Glassmorphic Card Container - Compact Centered Box */}
-            <div className="w-[900px] max-w-[90vw] h-auto rounded-[40px] overflow-hidden shadow-2xl flex relative z-10 backdrop-blur-xl"
+            {/* Main Glassmorphic Card Container - Wardiere Style Centered Box */}
+            <div className="w-[1100px] max-w-[85vw] h-[580px] rounded-[40px] overflow-hidden shadow-2xl flex relative z-10 backdrop-blur-xl"
                 style={{
                     background: 'rgba(10, 10, 10, 0.4)',
                     border: '1px solid rgba(255, 255, 255, 0.08)',
                     boxShadow: '0 0 80px rgba(255, 107, 53, 0.15), 0 0 0 1px rgba(0, 0, 0, 0.5), inset 0 0 60px rgba(255, 255, 255, 0.02)',
-                    animation: 'reveal 0.8s ease-out, scale-in 0.8s ease-out',
-                    margin: '2rem'
+                    animation: 'reveal 0.8s ease-out, scale-in 0.8s ease-out'
                 }}>
 
                 {/* Left Side - Form Section with Glassmorphism */}
-                <div className="w-1/2 p-10 flex flex-col justify-center relative backdrop-blur-md"
+                <div className="w-1/2 p-8 flex flex-col justify-center relative backdrop-blur-md"
                     style={{
                         background: 'linear-gradient(135deg, rgba(15, 15, 15, 0.9) 0%, rgba(10, 10, 10, 0.95) 100%)',
                         borderRight: '1px solid rgba(255, 255, 255, 0.05)'
@@ -163,12 +162,12 @@ const Login = () => {
                             style={{ animationDuration: '4s' }} />
                     </div>
 
-                    <div className="mb-8 relative z-10 animate-slide-up">
-                        <div className="flex items-center gap-3 mb-8">
+                    <div className="mb-6 relative z-10 animate-slide-up">
+                        <div className="flex items-center gap-3 mb-6">
                             <div className="animate-glow-pulse">
-                                <Logo size={40} />
+                                <Logo size={36} />
                             </div>
-                            <span className="text-2xl font-bold font-mono tracking-tight"
+                            <span className="text-xl font-bold font-mono tracking-tight"
                                 style={{
                                     background: 'var(--gradient-logo)',
                                     WebkitBackgroundClip: 'text',
@@ -178,11 +177,11 @@ const Login = () => {
                                 Bloom AI
                             </span>
                         </div>
-                        <h2 className="text-4xl font-bold text-white mb-3 font-mono tracking-tight">Welcome Back</h2>
-                        <p className="text-gray-400 text-base">Please enter your details to access the hub.</p>
+                        <h2 className="text-3xl font-bold text-white mb-2 font-mono tracking-tight">Welcome Back</h2>
+                        <p className="text-gray-400 text-sm">Please enter your details to access the hub.</p>
                     </div>
 
-                    <form onSubmit={handleSubmit} className="space-y-6 relative z-10 animate-slide-up" style={{ animationDelay: '0.1s' }}>
+                    <form onSubmit={handleSubmit} className="space-y-5 relative z-10 animate-slide-up" style={{ animationDelay: '0.1s' }}>
                         {/* Username Input with Enhanced Design */}
                         <div className="relative group">
                             <label className="block text-xs font-mono font-bold text-gray-400 mb-2 uppercase tracking-wider">
@@ -297,7 +296,7 @@ const Login = () => {
                         </div>
                     </form>
 
-                    <div className="mt-8 text-center text-sm text-gray-500 relative z-10 animate-fade-in" style={{ animationDelay: '0.3s' }}>
+                    <div className="mt-6 text-center text-sm text-gray-500 relative z-10 animate-fade-in" style={{ animationDelay: '0.3s' }}>
                         or{' '}
                         <a href="#" className="text-white hover:text-[#FF6B35] transition-colors font-medium">
                             Sign up
@@ -344,12 +343,12 @@ const Login = () => {
                     </div>
 
                     {/* Content Overlay with Stagger Animation */}
-                    <div className="relative z-10 flex flex-col items-center px-12 text-center">
-                        <div className="animate-scale-in mb-8" style={{ animationDelay: '0.2s' }}>
+                    <div className="relative z-10 flex flex-col items-center px-10 text-center">
+                        <div className="animate-scale-in mb-6" style={{ animationDelay: '0.2s' }}>
                             <FlowerAnimation />
                         </div>
 
-                        <h1 className="text-3xl font-bold text-white mb-4 font-mono tracking-tight animate-slide-up"
+                        <h1 className="text-2xl font-bold text-white mb-3 font-mono tracking-tight animate-slide-up"
                             style={{
                                 animationDelay: '0.4s',
                                 textShadow: '0 0 40px rgba(255, 107, 53, 0.3)'
@@ -357,19 +356,19 @@ const Login = () => {
                             Fai sbocciare il tuo business online
                         </h1>
 
-                        <p className="text-white/70 text-base max-w-sm leading-relaxed animate-slide-up"
+                        <p className="text-white/70 text-sm max-w-xs leading-relaxed animate-slide-up"
                             style={{ animationDelay: '0.6s' }}>
                             Accedi al tuo hub di intelligenza marketing e scopri il potenziale del tuo brand.
                         </p>
 
                         {/* Decorative brand quote */}
-                        <div className="mt-10 px-6 py-3 rounded-full animate-fade-in backdrop-blur-sm"
+                        <div className="mt-8 px-5 py-2.5 rounded-full animate-fade-in backdrop-blur-sm"
                             style={{
                                 animationDelay: '0.8s',
                                 background: 'rgba(255, 107, 53, 0.1)',
                                 border: '1px solid rgba(255, 107, 53, 0.2)'
                             }}>
-                            <span className="text-sm font-mono text-white/60">
+                            <span className="text-xs font-mono text-white/60">
                                 Protected by{' '}
                                 <span className="text-[#FF6B35] font-bold">Bloom AI Authentication</span>
                             </span>
