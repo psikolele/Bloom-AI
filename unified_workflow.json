@@ -1,0 +1,217 @@
+{
+    "name": "Bloom AI Unified Auth",
+    "nodes": [
+        {
+            "parameters": {
+                "httpMethod": "POST",
+                "path": "auth",
+                "options": {}
+            },
+            "id": "webhook-trigger",
+            "name": "Webhook",
+            "type": "n8n-nodes-base.webhook",
+            "typeVersion": 1.1,
+            "position": [
+                460,
+                360
+            ],
+            "webhookId": "auth"
+        },
+        {
+            "parameters": {
+                "dataType": "string",
+                "value1": "={{ $json.body.mode }}",
+                "rules": {
+                    "rules": [
+                        {
+                            "value2": "login"
+                        },
+                        {
+                            "value2": "register"
+                        }
+                    ]
+                }
+            },
+            "id": "switch-mode",
+            "name": "Switch Mode",
+            "type": "n8n-nodes-base.switch",
+            "typeVersion": 1,
+            "position": [
+                680,
+                360
+            ]
+        },
+        {
+            "parameters": {
+                "resource": "databasePage",
+                "databaseId": {
+                    "__rl": true,
+                    "value": "16ae5358-46dd-4846-b2fb-2c1f56bd596d",
+                    "mode": "list",
+                    "cachedResultName": "Brand Profiles Database",
+                    "cachedResultUrl": "https://www.notion.so/16ae535846dd4846b2fb2c1f56bd596d"
+                },
+                "propertiesUi": {
+                    "propertyValues": [
+                        {
+                            "key": "Name|title",
+                            "title": "={{ $json.body.username }}"
+                        },
+                        {
+                            "key": "Email|email",
+                            "emailValue": "={{ $json.body.email }}"
+                        },
+                        {
+                            "key": "Password|rich_text",
+                            "textContent": "={{ $json.body.password }}"
+                        }
+                    ]
+                },
+                "options": {}
+            },
+            "id": "create-user",
+            "name": "Create User",
+            "type": "n8n-nodes-base.notion",
+            "typeVersion": 2.1,
+            "position": [
+                940,
+                480
+            ],
+            "credentials": {
+                "notionApi": {
+                    "id": "jNP7bHIu6NZaobB0",
+                    "name": "Notion account"
+                }
+            }
+        },
+        {
+            "parameters": {
+                "resource": "databasePage",
+                "operation": "getAll",
+                "databaseId": {
+                    "__rl": true,
+                    "value": "16ae5358-46dd-4846-b2fb-2c1f56bd596d",
+                    "mode": "list",
+                    "cachedResultName": "Brand Profiles Database",
+                    "cachedResultUrl": "https://www.notion.so/16ae535846dd4846b2fb2c1f56bd596d"
+                },
+                "filterType": "manual",
+                "matchType": "all",
+                "filters": {
+                    "conditions": [
+                        {
+                            "key": "Name|title",
+                            "condition": "equals",
+                            "title": "={{ $json.body.username }}"
+                        },
+                        {
+                            "key": "Password|rich_text",
+                            "condition": "equals",
+                            "text": "={{ $json.body.password }}"
+                        }
+                    ]
+                },
+                "options": {}
+            },
+            "id": "get-user",
+            "name": "Get User",
+            "type": "n8n-nodes-base.notion",
+            "typeVersion": 2.1,
+            "position": [
+                940,
+                240
+            ],
+            "credentials": {
+                "notionApi": {
+                    "id": "jNP7bHIu6NZaobB0",
+                    "name": "Notion account"
+                }
+            }
+        },
+        {
+            "parameters": {
+                "respondWith": "json",
+                "responseBody": "{\n  \"success\": true,\n  \"message\": \"Operation successful\",\n  \"username\": \"{{ $json.body.username }}\"\n}",
+                "options": {}
+            },
+            "id": "respond-success",
+            "name": "Respond Success",
+            "type": "n8n-nodes-base.respondToWebhook",
+            "typeVersion": 1,
+            "position": [
+                1200,
+                360
+            ]
+        },
+        {
+            "parameters": {
+                "respondWith": "json",
+                "responseBody": "{\n  \"success\": false,\n  \"message\": \"User not found or invalid credentials\"\n}",
+                "options": {
+                    "responseCode": 401
+                }
+            },
+            "id": "respond-error",
+            "name": "Respond Error",
+            "type": "n8n-nodes-base.respondToWebhook",
+            "typeVersion": 1,
+            "position": [
+                1200,
+                180
+            ]
+        }
+    ],
+    "connections": {
+        "Webhook": {
+            "main": [
+                [
+                    {
+                        "node": "Switch Mode",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Switch Mode": {
+            "main": [
+                [
+                    {
+                        "node": "Get User",
+                        "type": "main",
+                        "index": 0
+                    }
+                ],
+                [
+                    {
+                        "node": "Create User",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Create User": {
+            "main": [
+                [
+                    {
+                        "node": "Respond Success",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Get User": {
+            "main": [
+                [
+                    {
+                        "node": "Respond Success",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        }
+    }
+}

@@ -32,9 +32,9 @@ keys_to_keep = {'name', 'nodes', 'connections', 'settings'}
 cleaned_workflow = {k: v for k, v in workflow.items() if k in keys_to_keep}
 
 # Sanitize settings
+# API is rejecting specific keys, so we try sending empty settings to let N8N use defaults
 if 'settings' in cleaned_workflow:
-     # Remove fields that might be read-only or invalid for PUT
-     cleaned_workflow['settings'].pop('availableInMCP', None)
+     cleaned_workflow['settings'] = {}
 
 with open('updated_workflow.json', 'w', encoding='utf-8') as f:
     json.dump(cleaned_workflow, f, indent=4)

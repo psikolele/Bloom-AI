@@ -40,10 +40,10 @@ const Register = () => {
         setIsLoading(true);
 
         try {
-            const response = await fetch('https://emanueleserra.app.n8n.cloud/webhook/register', {
+            const response = await fetch('/webhook/auth', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(formData)
+                body: JSON.stringify({ ...formData, mode: 'register' })
             });
 
             const text = await response.text(); // Read as text first

@@ -53,12 +53,12 @@ const Login = () => {
         setError(null);
 
         try {
-            const response = await fetch('/webhook/login', {
+            const response = await fetch('/webhook/auth', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(credentials)
+                body: JSON.stringify({ ...credentials, mode: 'login' })
             });
 
             // Assuming N8N returns { success: true/false, message: "..." }
