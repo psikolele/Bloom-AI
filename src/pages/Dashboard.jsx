@@ -3,6 +3,7 @@ import { useLocation } from 'react-router-dom';
 import Logo from '../components/Logo';
 import LoaderScreen from '../components/LoaderScreen';
 import SplitLink from '../components/SplitLink';
+import { MessageSquare, LayoutTemplate, UserCircle } from 'lucide-react';
 import '../styles/Login.css';
 import '../styles/Dashboard.css';
 
@@ -57,28 +58,7 @@ const Dashboard = () => {
                                 <div className="logo-main">
                                     <Logo size={160} />
                                 </div>
-                                <div
-                                    className="logo-text"
-                                    style={{
-                                        marginTop: '1rem',
-                                        display: 'flex',
-                                        justifyContent: 'center'
-                                    }}
-                                >
-                                    <img src="/bloom-text.png" alt="Bloom AI" style={{ height: '50px', objectFit: 'contain' }} />
-                                </div>
-                                <div className="logo-payoff" style={{
-                                    marginTop: '15px',
-                                    color: '#aaa',
-                                    fontSize: '16px',
-                                    fontFamily: 'monospace',
-                                    opacity: 0,
-                                    transition: 'opacity 1s ease',
-                                    textAlign: 'center'
-                                }}>
-                                    "Fai fiorire i tuoi social"
-                                </div>
-                                <style>{` .logo-payoff.loadIn { opacity: 1; } `}</style>
+                                {/* Removed Text Logo & Payoff as per request to clean up */}
                             </div>
 
                             {/* Right Side: Split Text Links */}
@@ -86,33 +66,49 @@ const Dashboard = () => {
                                 <div className="h-full flex flex-col justify-center px-12 w-full">
 
                                     <nav className="dashboard-links" style={{ opacity: 0, transition: 'opacity 1s ease' }}>
-                                        <SplitLink
-                                            href="https://caption-flow-nu.vercel.app/"
-                                            fontWidth={125}
-                                        >
-                                            CaptionFlow
-                                        </SplitLink>
 
-                                        <SplitLink
-                                            href="https://social-media-client-sooty-ten.vercel.app/"
-                                            fontWidth={140}
-                                        >
-                                            MarketingFlow
-                                        </SplitLink>
+                                        <div className="dashboard-item">
+                                            <div className="icon-box">
+                                                <MessageSquare size={28} />
+                                            </div>
+                                            <SplitLink
+                                                href="https://caption-flow-nu.vercel.app/"
+                                                fontWidth={120}
+                                            >
+                                                CaptionFlow
+                                            </SplitLink>
+                                        </div>
+
+                                        <div className="dashboard-item">
+                                            <div className="icon-box">
+                                                <LayoutTemplate size={28} />
+                                            </div>
+                                            <SplitLink
+                                                href="https://social-media-client-sooty-ten.vercel.app/"
+                                                fontWidth={130}
+                                            >
+                                                MarketingFlow
+                                            </SplitLink>
+                                        </div>
 
                                         {isAdmin && (
-                                            <SplitLink
-                                                href="https://web-app-brand-profile.vercel.app/"
-                                                fontWidth={190}
-                                            >
-                                                Create Brand Profile
-                                            </SplitLink>
+                                            <div className="dashboard-item">
+                                                <div className="icon-box">
+                                                    <UserCircle size={28} />
+                                                </div>
+                                                <SplitLink
+                                                    href="https://web-app-brand-profile.vercel.app/"
+                                                    fontWidth={140}
+                                                >
+                                                    Brand Profile
+                                                </SplitLink>
+                                            </div>
                                         )}
                                     </nav>
 
                                     <div className="mt-24 text-right opacity-50">
                                         <span className="text-xs font-mono text-gray-600 uppercase tracking-wider">
-                                            System Online &bull; {username === 'admin' ? 'Admin Mode' : 'User Mode'}
+                                            System Online &bull; {isAdmin ? 'Admin Mode' : 'User Mode'}
                                         </span>
                                     </div>
                                 </div>

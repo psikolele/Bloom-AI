@@ -27,7 +27,7 @@ const Logo = ({ size = 60 }) => {
                     position: 'relative',
                     zIndex: 2,
                     borderRadius: '50%',
-                    transform: 'scale(1.25)' /* Larger to bridge the gap completely */
+                    transform: 'scale(1.35)' /* Larger to bridge the gap completely */
                 }}
             />
 

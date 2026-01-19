@@ -2,16 +2,20 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Logo from '../components/Logo';
 import NeonPopup from '../components/NeonPopup'; // Import Popup
+import LoaderScreen from '../components/LoaderScreen';
 import '../styles/Login.css';
 
 const Login = () => {
     const navigate = useNavigate();
     const [credentials, setCredentials] = useState({ username: '', password: '' });
-    const [isLoading, setIsLoading] = useState(false); // Valid Loading state
+    const [isLoading, setIsLoading] = useState(false); // Valid Loading state (Auth)
+    const [bootstrapping, setBootstrapping] = useState(true); // Initial App Load
     const [error, setError] = useState(null); // Error state for Popup
 
     // Animation Logic
     useEffect(() => {
+        if (bootstrapping) return; // Wait for loader
+
         // Stage 1: Scale Check Logo
         setTimeout(() => {
             const logoContainer = document.querySelector('.logoContainer');
@@ -92,86 +96,90 @@ const Login = () => {
 
     return (
         <div id="login-body">
+            {/* Bootstrap Loader */}
+            {bootstrapping && <LoaderScreen onAnimationEnd={() => setBootstrapping(false)} />}
+
             {/* Render Popup if Error exists */}
             {error && <NeonPopup message={error} onClose={() => setError(null)} />}
 
-            <div id="container">
-                <div id="inviteContainer">
+            {!bootstrapping && (
+                <div id="container">
+                    <div id="inviteContainer">
 
-                    {/* Logo Container (Left) */}
-                    <div className="logoContainer">
-                        <div className="logo-main">
-                            <Logo size={120} />
+                        {/* Logo Container (Left) */}
+                        <div className="logoContainer">
+                            <div className="logo-main">
+                                <Logo size={120} />
+                            </div>
+                            {/* Added Text Logo */}
+                            <div className="logo-text" style={{ marginTop: '20px', opacity: 0, transform: 'translateY(10px)', transition: 'all 0.8s ease' }}>
+                                <img
+                                    src="/bloom-text.png"
+                                    alt="Bloom AI"
+                                    style={{
+                                        width: '180px',
+                                        objectFit: 'contain',
+                                        filter: 'drop-shadow(0 0 10px rgba(255, 107, 53, 0.3))'
+                                    }}
+                                />
+                            </div>
                         </div>
-                        {/* Added Text Logo */}
-                        <div className="logo-text" style={{ marginTop: '20px', opacity: 0, transform: 'translateY(10px)', transition: 'all 0.8s ease' }}>
-                            <img
-                                src="/bloom-text.png"
-                                alt="Bloom AI"
-                                style={{
-                                    width: '180px',
-                                    objectFit: 'contain',
-                                    filter: 'drop-shadow(0 0 10px rgba(255, 107, 53, 0.3))'
-                                }}
-                            />
-                        </div>
-                    </div>
 
-                    {/* Accept Container (Right/Form) */}
-                    <div className="acceptContainer">
-                        <form onSubmit={handleSubmit}>
-                            <h1>Welcome to Bloom AI</h1>
+                        {/* Accept Container (Right/Form) */}
+                        <div className="acceptContainer">
+                            <form onSubmit={handleSubmit}>
+                                <h1>Welcome to Bloom AI</h1>
 
-                            <div className="formContainer">
-                                <div className="formDiv" style={{ transitionDelay: '0.2s' }}>
-                                    <p>USERNAME</p>
-                                    <input
-                                        type="text"
-                                        name="username"
-                                        required
-                                        value={credentials.username}
-                                        onChange={handleChange}
-                                        autoComplete="off"
-                                        disabled={isLoading}
-                                    />
-                                </div>
+                                <div className="formContainer">
+                                    <div className="formDiv" style={{ transitionDelay: '0.2s' }}>
+                                        <p>USERNAME</p>
+                                        <input
+                                            type="text"
+                                            name="username"
+                                            required
+                                            value={credentials.username}
+                                            onChange={handleChange}
+                                            autoComplete="off"
+                                            disabled={isLoading}
+                                        />
+                                    </div>
 
-                                <div className="formDiv" style={{ transitionDelay: '0.4s' }}>
-                                    <p>PASSWORD</p>
-                                    <input
-                                        type="password"
-                                        name="password"
-                                        required
-                                        value={credentials.password}
-                                        onChange={handleChange}
-                                        disabled={isLoading}
-                                    />
-                                    <a className="forgotPas" href="#">FORGOT YOUR PASSWORD?</a>
-                                </div>
+                                    <div className="formDiv" style={{ transitionDelay: '0.4s' }}>
+                                        <p>PASSWORD</p>
+                                        <input
+                                            type="password"
+                                            name="password"
+                                            required
+                                            value={credentials.password}
+                                            onChange={handleChange}
+                                            disabled={isLoading}
+                                        />
+                                        <a className="forgotPas" href="#">FORGOT YOUR PASSWORD?</a>
+                                    </div>
 
-                                <div className="formDiv" style={{ transitionDelay: '0.6s' }}>
-                                    <button
-                                        className="acceptBtn"
-                                        type="submit"
-                                        disabled={isLoading}
-                                        style={{ opacity: isLoading ? 0.7 : 1, cursor: isLoading ? 'wait' : 'pointer' }}
-                                    >
-                                        {isLoading ? 'Authenticating...' : 'Login'}
-                                    </button>
-                                    <div className="register">
-                                        Need an account?
-                                        <a href="#" onClick={(e) => { e.preventDefault(); navigate('/register'); }}>
-                                            Register
-                                        </a>
+                                    <div className="formDiv" style={{ transitionDelay: '0.6s' }}>
+                                        <button
+                                            className="acceptBtn"
+                                            type="submit"
+                                            disabled={isLoading}
+                                            style={{ opacity: isLoading ? 0.7 : 1, cursor: isLoading ? 'wait' : 'pointer' }}
+                                        >
+                                            {isLoading ? 'Authenticating...' : 'Login'}
+                                        </button>
+                                        <div className="register">
+                                            Need an account?
+                                            <a href="#" onClick={(e) => { e.preventDefault(); navigate('/register'); }}>
+                                                Register
+                                            </a>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
 
-                        </form>
+                            </form>
+                        </div>
+
                     </div>
-
                 </div>
-            </div>
         </div>
     );
 };

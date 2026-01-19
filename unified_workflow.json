@@ -162,7 +162,7 @@
         {
             "parameters": {
                 "respondWith": "json",
-                "responseBody": "{\n  \"success\": true,\n  \"message\": \"Login successful\",\n  \"username\": \"{{ $json.user.properties.Name.title[0].plain_text }}\"\n}",
+                "responseBody": "={\n  \"success\": true,\n  \"message\": \"Login successful\",\n  \"username\": \"{{ $json.user.property_username || $json.user.property_name }}\"\n}",
                 "options": {}
             },
             "id": "respond-success",
