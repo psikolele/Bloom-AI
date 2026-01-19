@@ -9,8 +9,8 @@ import '../styles/Dashboard.css';
 const Dashboard = () => {
     const [loading, setLoading] = useState(true);
     const location = useLocation();
-    const username = location.state?.username || 'user'; // Default to 'user'
-    const isAdmin = username === 'admin';
+    const username = location.state?.username || 'user';
+    const isAdmin = (username || '').toString().toLowerCase().trim() === 'admin';
 
     useEffect(() => {
         if (!loading) {
