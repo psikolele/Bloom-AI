@@ -103,9 +103,9 @@ const Dashboard = () => {
                                         {isAdmin && (
                                             <SplitLink
                                                 href="https://web-app-brand-profile.vercel.app/"
-                                                fontWidth={130}
+                                                fontWidth={190}
                                             >
-                                                Brand Profile
+                                                Create Brand Profile
                                             </SplitLink>
                                         )}
                                     </nav>
