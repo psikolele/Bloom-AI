@@ -73,7 +73,7 @@ const Dashboard = () => {
                                             </div>
                                             <SplitLink
                                                 href="https://caption-flow-nu.vercel.app/"
-                                                fontWidth={120}
+                                                fontWidth={110}
                                             >
                                                 CaptionFlow
                                             </SplitLink>
@@ -85,7 +85,7 @@ const Dashboard = () => {
                                             </div>
                                             <SplitLink
                                                 href="https://social-media-client-sooty-ten.vercel.app/"
-                                                fontWidth={130}
+                                                fontWidth={120}
                                             >
                                                 MarketingFlow
                                             </SplitLink>
@@ -98,7 +98,7 @@ const Dashboard = () => {
                                                 </div>
                                                 <SplitLink
                                                     href="https://web-app-brand-profile.vercel.app/"
-                                                    fontWidth={140}
+                                                    fontWidth={130}
                                                 >
                                                     Brand Profile
                                                 </SplitLink>

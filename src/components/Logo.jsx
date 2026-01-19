@@ -27,7 +27,7 @@ const Logo = ({ size = 60 }) => {
                     position: 'relative',
                     zIndex: 2,
                     borderRadius: '50%',
-                    transform: 'scale(1.35)' /* Larger to bridge the gap completely */
+                    transform: 'scale(1.45)' /* Larger to bridge the gap completely */
                 }}
             />
 
@@ -60,7 +60,7 @@ const Logo = ({ size = 60 }) => {
             .logo-glow-ring::after {
                 content: '';
                 position: absolute;
-                inset: 3px; /* Thickness of the light beam */
+                inset: 1px; /* Thinner gap (was 3px) so ring is closer */
                 background: #0A0A0A; /* Match bg to hide center */
                 border-radius: 50%;
             }
