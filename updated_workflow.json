@@ -103,5 +103,10 @@
                 ]
             ]
         }
+    },
+    "settings": {
+        "callerPolicy": "workflowsFromSameOwner",
+        "timeSavedMode": "dynamic",
+        "executionOrder": "v0"
     }
 }

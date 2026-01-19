@@ -27,9 +27,14 @@ if not email_mapped:
 
 # Save updated workflow
 # Remove read-only fields that cause API errors
-# N8N API is strict about read-only fields during PUT
-keys_to_keep = {'name', 'nodes', 'connections'}
+# N8N API requires settings but is strict about content
+keys_to_keep = {'name', 'nodes', 'connections', 'settings'}
 cleaned_workflow = {k: v for k, v in workflow.items() if k in keys_to_keep}
+
+# Sanitize settings
+if 'settings' in cleaned_workflow:
+     # Remove fields that might be read-only or invalid for PUT
+     cleaned_workflow['settings'].pop('availableInMCP', None)
 
 with open('updated_workflow.json', 'w', encoding='utf-8') as f:
     json.dump(cleaned_workflow, f, indent=4)
