@@ -36,25 +36,21 @@ headers = {
     "Content-Type": "application/json"
 }
 
-print(f"Uploading workflow to {N8N_URL}...")
+# WORKFLOW ID TO UPDATE
+WORKFLOW_ID = "uYNin7KcptmBF8Nw"
+URL_WITH_ID = f"{N8N_URL}/{WORKFLOW_ID}"
+
+print(f"Updating workflow {WORKFLOW_ID} at {URL_WITH_ID}...")
 
 try:
-    response = requests.post(N8N_URL, json=payload, headers=headers)
+    # We use PUT to update
+    response = requests.put(URL_WITH_ID, json=payload, headers=headers)
     
     if response.status_code == 200:
         data = response.json()
-        workflow_id = data['id']
-        print(f"SUCCESS! Workflow created with ID: {workflow_id}")
-        
-        # ACTIVATE WORKFLOW
-        print("Activating workflow...")
-        activate_url = f"{N8N_URL}/{workflow_id}/activate"
-        activate_response = requests.post(activate_url, headers=headers)
-        
-        if activate_response.status_code == 200:
-             print("Workflow is now ACTIVE.")
-        else:
-             print(f"Warning: Could not activate workflow automatically (Status {activate_response.status_code}). Please activate manually in N8N.")
+        print(f"SUCCESS! Workflow updated.")
+        print(f"Name: {data['name']}")
+        print("Workflow remains ACTIVE.")
              
     else:
         print(f"FAILED (Status {response.status_code})")

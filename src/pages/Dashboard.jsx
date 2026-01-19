@@ -2,8 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import Logo from '../components/Logo';
 import LoaderScreen from '../components/LoaderScreen';
-import DashboardCard from '../components/DashboardCard';
-import { LayoutTemplate, MessageSquare, UserCircle } from 'lucide-react';
+import SplitLink from '../components/SplitLink';
 import '../styles/Login.css';
 import '../styles/Dashboard.css';
 
@@ -86,34 +85,29 @@ const Dashboard = () => {
                             <div className="acceptContainer">
                                 <div className="h-full flex flex-col justify-center px-12 w-full">
 
-                                    <nav className="dashboard-links w-full flex flex-col gap-4" style={{ opacity: 0, transition: 'opacity 1s ease' }}>
+                                    <nav className="dashboard-links" style={{ opacity: 0, transition: 'opacity 1s ease' }}>
+                                        <SplitLink
+                                            href="https://caption-flow-nu.vercel.app/"
+                                            fontWidth={125}
+                                        >
+                                            CaptionFlow
+                                        </SplitLink>
 
-                                        <DashboardCard
-                                            title="CaptionFlow"
-                                            description="AI-powered caption generator for social media."
-                                            url="https://caption-flow-nu.vercel.app/"
-                                            icon={MessageSquare}
-                                            delay={0.1}
-                                        />
-
-                                        <DashboardCard
-                                            title="MarketingFlow"
-                                            description="Comprehensive social media marketing suite."
-                                            url="https://social-media-client-sooty-ten.vercel.app/"
-                                            icon={LayoutTemplate}
-                                            delay={0.2}
-                                        />
+                                        <SplitLink
+                                            href="https://social-media-client-sooty-ten.vercel.app/"
+                                            fontWidth={140}
+                                        >
+                                            MarketingFlow
+                                        </SplitLink>
 
                                         {isAdmin && (
-                                            <DashboardCard
-                                                title="Brand Profile"
-                                                description="Manage brand identity and settings."
-                                                url="https://web-app-brand-profile.vercel.app/"
-                                                icon={UserCircle}
-                                                delay={0.3}
-                                            />
+                                            <SplitLink
+                                                href="https://web-app-brand-profile.vercel.app/"
+                                                fontWidth={130}
+                                            >
+                                                Brand Profile
+                                            </SplitLink>
                                         )}
-
                                     </nav>
 
                                     <div className="mt-24 text-right opacity-50">
