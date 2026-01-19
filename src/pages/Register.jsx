@@ -46,9 +46,21 @@ const Register = () => {
                 body: JSON.stringify(formData)
             });
 
-            const data = await response.json();
+            const text = await response.text(); // Read as text first
+            let data = {};
 
-            if (response.ok && data.success) {
+            try {
+                data = JSON.parse(text);
+            } catch (e) {
+                // If not JSON, check if it's the default N8N success message
+                if (text.includes('Workflow was started')) {
+                    data = { success: true };
+                } else {
+                    console.warn('Received non-JSON response:', text);
+                }
+            }
+
+            if (response.ok && (data.success || text.includes('Workflow was started'))) {
                 setPopup({
                     type: 'success',
                     title: 'Account Created',

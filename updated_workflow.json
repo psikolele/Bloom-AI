@@ -1,0 +1,107 @@
+{
+    "name": "Bloom AI Registration",
+    "nodes": [
+        {
+            "parameters": {
+                "httpMethod": "POST",
+                "path": "register",
+                "options": {},
+                "responseMode": "lastNode"
+            },
+            "id": "webhook-trigger",
+            "name": "Webhook",
+            "type": "n8n-nodes-base.webhook",
+            "typeVersion": 1.1,
+            "position": [
+                832,
+                368
+            ],
+            "webhookId": "register"
+        },
+        {
+            "parameters": {
+                "resource": "databasePage",
+                "databaseId": {
+                    "__rl": true,
+                    "value": "16ae5358-46dd-4846-b2fb-2c1f56bd596d",
+                    "mode": "list",
+                    "cachedResultName": "Brand Profiles Database",
+                    "cachedResultUrl": "https://www.notion.so/16ae535846dd4846b2fb2c1f56bd596d"
+                },
+                "propertiesUi": {
+                    "propertyValues": [
+                        {
+                            "key": "Name|title",
+                            "title": "={{ $json.body.username }}"
+                        },
+                        {
+                            "key": "Email|email",
+                            "emailValue": "={{ $json.body.email }}"
+                        },
+                        {
+                            "key": "Caption Generated At|date"
+                        },
+                        {
+                            "key": "Password|rich_text",
+                            "textContent": "={{ $json.body.password }}"
+                        }
+                    ]
+                },
+                "options": {}
+            },
+            "id": "create-notion-page",
+            "name": "Notion",
+            "type": "n8n-nodes-base.notion",
+            "typeVersion": 2.1,
+            "position": [
+                1040,
+                368
+            ],
+            "credentials": {
+                "notionApi": {
+                    "id": "jNP7bHIu6NZaobB0",
+                    "name": "Notion account"
+                }
+            }
+        },
+        {
+            "parameters": {
+                "respondWith": "json",
+                "responseBody": "{\n  \"success\": true,\n  \"message\": \"User registered successfully\"\n}",
+                "options": {}
+            },
+            "id": "respond-success",
+            "name": "Respond to Webhook",
+            "type": "n8n-nodes-base.respondToWebhook",
+            "typeVersion": 1,
+            "position": [
+                1264,
+                368
+            ]
+        }
+    ],
+    "connections": {
+        "Webhook": {
+            "main": [
+                [
+                    {
+                        "node": "Notion",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Notion": {
+            "main": [
+                [
+                    {
+                        "node": "Respond to Webhook",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        }
+    }
+}

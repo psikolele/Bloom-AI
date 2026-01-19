@@ -1,6 +1,10 @@
 {
     "rewrites": [
         {
+            "source": "/webhook/:match*",
+            "destination": "https://emanueleserra.app.n8n.cloud/webhook/:match*"
+        },
+        {
             "source": "/(.*)",
             "destination": "/index.html"
         }

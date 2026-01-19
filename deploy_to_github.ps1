@@ -19,21 +19,19 @@ if (-not (Get-Command gh -ErrorAction SilentlyContinue)) {
     exit 1
 }
 
-Write-Host "Initializing Git Repository..." -ForegroundColor Green
-git init
-
-Write-Host "Adding files..." -ForegroundColor Green
-git add .
-
-Write-Host "Creating initial commit..." -ForegroundColor Green
-git commit -m "Initial commit - Bloom AI Hub"
-
-Write-Host "Creating GitHub repository 'Bloom-AI'..." -ForegroundColor Green
-# Attempt to create public repo and push
-# --source=. uses current directory
-# --remote=origin sets the remote
-# --push pushes the commits
-gh repo create Bloom-AI --public --source=. --remote=origin --push
+# Check if .git exists, if so just push
+if (Test-Path .git) {
+    Write-Host "Git already initialized. Pushing changes..." -ForegroundColor Green
+    git add .
+    git commit -m "Update UI and proxy settings"
+    git push origin main
+} else {
+    Write-Host "Initializing Git Repository..." -ForegroundColor Green
+    git init
+    git add .
+    git commit -m "Initial commit - Bloom AI Hub"
+    gh repo create Bloom-AI --public --source=. --remote=origin --push
+}
 
 if ($?) {
     Write-Host "Successfully deployed to GitHub!" -ForegroundColor Green

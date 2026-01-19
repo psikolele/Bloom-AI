@@ -53,7 +53,7 @@ const Login = () => {
         setError(null);
 
         try {
-            const response = await fetch('https://emanueleserra.app.n8n.cloud/webhook/login', {
+            const response = await fetch('/webhook/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -64,12 +64,13 @@ const Login = () => {
             // Assuming N8N returns { success: true/false, message: "..." }
             // We will adapt based on the response content.
             let data;
+            const responseText = await response.text();
             try {
-                data = await response.json();
+                data = JSON.parse(responseText);
             } catch (parseError) {
-                // Fallback if not JSON
-                console.error("Non-JSON response", parseError);
-                throw new Error("Server error: Invalid response format");
+                console.error("Non-JSON response:", responseText);
+                console.error("Status Code:", response.status);
+                throw new Error(`Server error: Invalid response format (${response.status})`);
             }
 
             if (response.ok && data.success) { // logic dependent on N8N return structure
@@ -102,13 +103,24 @@ const Login = () => {
                         <div className="logo-main">
                             <Logo size={120} />
                         </div>
-                        {/* Logo Text Removed */}
+                        {/* Added Text Logo */}
+                        <div className="logo-text" style={{ marginTop: '20px', opacity: 0, transform: 'translateY(10px)', transition: 'all 0.8s ease' }}>
+                            <img
+                                src="/bloom-text.png"
+                                alt="Bloom AI"
+                                style={{
+                                    width: '180px',
+                                    objectFit: 'contain',
+                                    filter: 'drop-shadow(0 0 10px rgba(255, 107, 53, 0.3))'
+                                }}
+                            />
+                        </div>
                     </div>
 
                     {/* Accept Container (Right/Form) */}
                     <div className="acceptContainer">
                         <form onSubmit={handleSubmit}>
-                            <h1>Welcome Back!</h1>
+                            <h1>Welcome to Bloom AI</h1>
 
                             <div className="formContainer">
                                 <div className="formDiv" style={{ transitionDelay: '0.2s' }}>
