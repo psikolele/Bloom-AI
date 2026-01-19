@@ -202,9 +202,15 @@
 }
 
 /* Responsive Text Size */
-@media (max-width: 1024px) {
+@media (max-width: 1200px) {
     .split-link {
-        font-size: 2.5rem;
+        font-size: 2.8rem;
+    }
+}
+
+@media (max-width: 900px) {
+    .split-link {
+        font-size: 2.2rem;
     }
 }
 
