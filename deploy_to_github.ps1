@@ -24,7 +24,7 @@ if (Test-Path .git) {
     Write-Host "Git already initialized. Pushing changes..." -ForegroundColor Green
     git add .
     git commit -m "Update UI and proxy settings"
-    git push origin master
+    git push origin main
 } else {
     Write-Host "Initializing Git Repository..." -ForegroundColor Green
     git init

@@ -45,7 +45,7 @@ const Login = () => {
                 }, 500);
             }, 500);
         }, 100);
-    }, []);
+    }, [bootstrapping]);
 
     const handleChange = (e) => {
         setCredentials({ ...credentials, [e.target.name]: e.target.value });
