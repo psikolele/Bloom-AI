@@ -40,10 +40,10 @@ const Register = () => {
         setIsLoading(true);
 
         try {
-            const response = await fetch('/webhook/auth', {
+            const response = await fetch('/webhook/register', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ ...formData, mode: 'register' })
+                body: JSON.stringify(formData)
             });
 
             const text = await response.text(); // Read as text first

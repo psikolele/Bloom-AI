@@ -1,0 +1,105 @@
+{
+  "parameters": {
+    "resource": "databasePage",
+    "databaseId": {
+      "__rl": true,
+      "value": "16ae5358-46dd-4846-b2fb-2c1f56bd596d",
+      "mode": "list",
+      "cachedResultName": "Brand Profiles Database",
+      "cachedResultUrl": "https://www.notion.so/16ae535846dd4846b2fb2c1f56bd596d"
+    },
+    "title": "={{ $('Parse All Caption').item.json.brand_name }}",
+    "propertiesUi": {
+      "propertyValues": [
+        {
+          "key": "Industry|select",
+          "selectValue": "={{ $json.industry }}"
+        },
+        {
+          "key": "Website|url",
+          "urlValue": "={{ $json.website }}"
+        },
+        {
+          "key": "Target Age|rich_text",
+          "textContent": "={{ $json.target_age }}"
+        },
+        {
+          "key": "Target Job|rich_text",
+          "textContent": "={{ $json.target_job }}"
+        },
+        {
+          "key": "Target Geo|rich_text",
+          "textContent": "={{ $json.target_geo }}"
+        },
+        {
+          "key": "Pain Point 1|rich_text",
+          "textContent": "={{ $json.pain_point_1 }}"
+        },
+        {
+          "key": "Pain Point 2|rich_text",
+          "textContent": "={{ $json.pain_point_2 }}"
+        },
+        {
+          "key": "Pain Point 3|rich_text",
+          "textContent": "={{ $json.pain_point_3 }}"
+        },
+        {
+          "key": "Keywords|rich_text",
+          "textContent": "={{ Array.isArray($json.keywords) ? $json.keywords.join(', ') : '' }}"
+        },
+        {
+          "key": "Competitor 1 Name|rich_text",
+          "textContent": "={{ $json.competitor_1_name }}"
+        },
+        {
+          "key": "Competitor 1 Instagram|url",
+          "urlValue": "={{ $json.competitor_1_instagram }}"
+        },
+        {
+          "key": "Competitor 2 Name|rich_text",
+          "textContent": "={{ $json.competitor_2_name }}"
+        },
+        {
+          "key": "Competitor 2 Instagram|url",
+          "urlValue": "={{ $json.competitor_2_instagram }}"
+        },
+        {
+          "key": "Instagram Handle|rich_text",
+          "textContent": "=@{{ $json.instagram_handle }}"
+        },
+        {
+          "key": "Instagram|url",
+          "urlValue": "={{ $json.social_links.instagram }}"
+        },
+        {
+          "key": "Tone Instagram|rich_text",
+          "textContent": "={{ $json.tone_instagram }}"
+        },
+        {
+          "key": "Tone Facebook|rich_text",
+          "textContent": "={{ $json.tone_facebook }}"
+        },
+        {
+          "key": "Caption Generated At|date",
+          "date": "={{ $json.caption_generated_at }}"
+        }
+      ]
+    },
+    "options": {},
+    "properties": {}
+  },
+  "type": "n8n-nodes-base.notion",
+  "typeVersion": 2.2,
+  "position": [
+    704,
+    1136
+  ],
+  "id": "3ea65077-8478-418a-8a3f-405d874a5400",
+  "name": "Create a database page",
+  "credentials": {
+    "notionApi": {
+      "id": "jNP7bHIu6NZaobB0",
+      "name": "Notion account"
+    }
+  }
+}
