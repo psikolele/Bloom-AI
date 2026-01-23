@@ -1,0 +1,6 @@
+Test Time: 2026-01-23 13:11:33.493681
+Status: 200
+Headers: {'Date': 'Fri, 23 Jan 2026 12:11:33 GMT', 'Content-Type': 'application/json; charset=utf-8', 'Transfer-Encoding': 'chunked', 'Connection': 'keep-alive', 'CF-Ray': '9c2731b99fccf41b-MXP', 'CF-Cache-Status': 'DYNAMIC', 'Nel': '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}', 'ETag': 'W/"39-L4ChN3EFRYuIiTpWUtpbvMTfrpg"', 'Server': 'cloudflare', 'Strict-Transport-Security': 'max-age=15552000; includeSubDomains', 'Vary': 'Accept-Encoding, Accept-Encoding', 'content-security-policy': 'sandbox allow-downloads allow-forms allow-modals allow-orientation-lock allow-pointer-lock allow-popups allow-presentation allow-scripts allow-top-navigation allow-top-navigation-by-user-activation allow-top-navigation-to-custom-protocols', 'referrer-policy': 'same-origin', 'x-content-type-options': 'nosniff', 'x-frame-options': 'SAMEORIGIN', 'Report-To': '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=N%2BanQSkOiEm8Ya2vZaFoEMeqzLAGrN9AiZ99EKODQf0wZ3s7Y1jg4kY99YpIND7c7Pb%2FIbdWdfpEB%2BSIENJbznXcZBEmT4tcywVCsAxau53lWvQUh5fwFMAZ"}]}', 'Content-Encoding': 'gzip'}
+
+Response:
+{"success":true,"message":"User registered successfully"}
